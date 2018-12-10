@@ -5,11 +5,27 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
   }
-
   componentDidMount() {
-    setTimeout(() => {
-      this.settings.style.opacity = '1';
-    }, 10);
+    if (this.props.open) {
+      this.settings.style.display = 'block';
+    } else {
+      this.settings.style.display = 'none';
+    }
+  }
+
+  shouldComponentUpdate(props) {
+    if (props.open) {
+      this.settings.style.display = 'block';
+      setTimeout(() => {
+        this.settings.style.opacity = '1';
+      }, 10);
+    } else {
+      this.settings.style.opacity = '0';
+      setTimeout(() => {
+        this.settings.style.display = 'none';
+      }, 300);
+    }
+    return true;
   }
 
   render() {

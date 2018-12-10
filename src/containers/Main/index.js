@@ -38,7 +38,7 @@ class Main extends React.Component {
             dictionaryBtnClick={this.dictionaryBtnClick}
           />
           <WordsTillTest />
-          {this.state.openSettings ? <Settings /> : null}
+          <Settings open={this.state.openSettings} />
         </div>
         <div className="footer">
           <div className="dictionary-button" onClick={this.dictionaryBtnClick}>
