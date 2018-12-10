@@ -6,8 +6,18 @@ class Settings extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.settings.style.opacity = '1';
+    }, 10);
+  }
+
   render() {
-    return this.props.open ? <div className="settings">got me going crazy</div> : null;
+    return (
+      <div className="settings" ref={ref => (this.settings = ref)}>
+        got me going crazy
+      </div>
+    );
   }
 }
 

@@ -17,16 +17,15 @@ class Main extends React.Component {
   }
 
   dictionaryBtnClick = () => {
-    this.setState({ openSettings: false });
     this.setState({ openDictionary: !this.state.openDictionary });
+    console.log(this.state.openDictionary);
   };
   settingsBtnClick = () => {
-    this.setState({ openDictionary: false });
     this.setState({ openSettings: !this.state.openSettings });
   };
 
   render() {
-    console.log(this.state.openSettings);
+    // console.log(this.state.openDictionary);
     return (
       <div className="main">
         <div className="header">
@@ -34,9 +33,12 @@ class Main extends React.Component {
           <img src={settings} alt="" className="settings-img" onClick={this.settingsBtnClick} />
         </div>
         <div className="content">
-          <Dictionary open={this.state.openDictionary} />
+          <Dictionary
+            open={this.state.openDictionary}
+            dictionaryBtnClick={this.dictionaryBtnClick}
+          />
           <WordsTillTest />
-          <Settings open={this.state.openSettings} />
+          {this.state.openSettings ? <Settings /> : null}
         </div>
         <div className="footer">
           <div className="dictionary-button" onClick={this.dictionaryBtnClick}>
