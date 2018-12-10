@@ -8,16 +8,14 @@
   /* align-items: center; */
   flex-direction: column;
   z-index: 2;
-  /* overflow: auto; */
+  overflow: hidden;
   transition: all 0.5s ease;
-}
-
-.dictionary::-webkit-scrollbar {
-  display: none;
 }
 
 .close-btn {
   cursor: pointer;
+  position: fixed;
+  background: #8a97ff;
   padding: 10px;
   width: 20px;
   height: 20px;
@@ -28,16 +26,33 @@
   background: rgb(122, 134, 223);
 }
 
-.word {
-  width: 97%;
-  height: 47px;
-  /* padding: 12px; */
-  background: white;
-  border-radius: 5px;
-  margin-bottom: 8px;
+.words {
+  overflow: auto;
+  /* width: 100%; */
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  /* align-items: center; */
+  justify-content: flex-start;
+  padding-left: 20px;
+  /* margin-top: 45px; */
+  padding-top: 60px;
+}
+
+.words::-webkit-scrollbar {
+  display: none;
+}
+
+.word {
+  margin-right: 10px;
+  background: white;
+  margin-bottom: 8px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.word-fat {
+  font-weight: bold;
 }
 
 .word-top,

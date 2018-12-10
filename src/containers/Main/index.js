@@ -27,7 +27,16 @@ class Main extends React.Component {
   render() {
     // console.log(this.state.openDictionary);
     return (
-      <div className="main">
+      <div
+        className="main"
+        onClick={event => {
+          if (event.target.className == 'settings' || event.target.className == 'settings-img') {
+            return null;
+          } else {
+            this.setState({ openSettings: false });
+          }
+        }}
+      >
         <div className="header">
           <div className="logo">qiqi</div>
           <img src={settings} alt="" className="settings-img" onClick={this.settingsBtnClick} />
