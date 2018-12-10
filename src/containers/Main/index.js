@@ -22,6 +22,9 @@ class Main extends React.Component {
   };
   settingsBtnClick = () => {
     this.setState({ openSettings: !this.state.openSettings });
+    this.state.openSettings
+      ? (this.settingsImg.style.transform = 'rotate(100deg)')
+      : (this.settingsImg.style.transform = 'rotate(-100deg)');
   };
 
   render() {
@@ -34,12 +37,19 @@ class Main extends React.Component {
             return null;
           } else {
             this.setState({ openSettings: false });
+            this.settingsImg.style.transform = 'rotate(100deg)';
           }
         }}
       >
         <div className="header">
           <div className="logo">qiqi</div>
-          <img src={settings} alt="" className="settings-img" onClick={this.settingsBtnClick} />
+          <img
+            src={settings}
+            alt=""
+            className="settings-img"
+            ref={ref => (this.settingsImg = ref)}
+            onClick={this.settingsBtnClick}
+          />
         </div>
         <div className="content">
           <Dictionary
