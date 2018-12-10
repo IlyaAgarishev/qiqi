@@ -1,0 +1,42 @@
+.dictionary {
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  background: #8997ff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
+  overflow: auto;
+}
+
+.dictionary::-webkit-scrollbar {
+  display: none;
+}
+
+.word {
+  width: 97%;
+  height: 47px;
+  padding: 12px;
+  background: white;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.word-top,
+.word-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.original-word {
+  font-weight: bold;
+}
+
+.word-bottom {
+  margin-top: 5px;
+}

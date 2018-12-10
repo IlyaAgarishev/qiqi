@@ -1,0 +1,64 @@
+.main {
+  width: 500px;
+  height: 600px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  width: 96%;
+  padding: 2%;
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  color: #0091d7;
+}
+.settings-img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.content {
+  /* background: #8997ff; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  width: 96%;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.dictionary-button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  background: #8997ff;
+  display: flex;
+  height: 20px;
+}
+
+.dictionary-button:hover {
+  transition: all 0.3s ease;
+  background: rgb(128, 141, 236);
+}
+
+.book {
+  width: 20px;
+  margin-right: 5px;
+}

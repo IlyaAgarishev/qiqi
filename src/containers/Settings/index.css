@@ -1,0 +1,9 @@
+.settings {
+  position: relative;
+  top: -40px;
+  left: 80px;
+  width: 300px;
+  height: 400px;
+  z-index: 1;
+  background: #0091d7;
+}

@@ -1,0 +1,20 @@
+.wordsTillTest {
+  position: absolute;
+  width: 350px;
+  height: 200px;
+  box-shadow: 0 0 50px 1px rgb(235, 235, 235);
+  background: white;
+  font-weight: bold;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #5e4b6e;
+}
+
+.numberOfWords {
+  margin: 15px 0;
+  color: #0091d7;
+  font-size: 35px;
+}
