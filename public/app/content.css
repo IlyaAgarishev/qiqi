@@ -1,0 +1,38 @@
+.reject-word-adding-rectangle {
+  padding: 5px 20px;
+  background: #8997ff;
+  z-index: 99999999;
+  box-shadow: 0px 5px 20px rgba(65, 105, 255, 0.2);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reject-word-adding-triangle {
+  width: 0px;
+  height: 0px;
+  margin-left: 5px;
+  border-style: solid;
+  border-width: 10px 10px 0 10px;
+  border-color: #8997ff transparent transparent transparent;
+}
+
+.reject-word-adding-rectangle:hover {
+  background: rgb(255, 37, 37);
+  transition: all 0.3s ease;
+}
+
+.reject-word-adding-rectangle:hover ~ .reject-word-adding-triangle {
+  transition: all 0.3s ease;
+  border-color: rgb(255, 37, 37) transparent transparent transparent;
+}
+
+.reject-word-adding-bin {
+  position: absolute;
+  width: 15px;
+  /* transition: all 0.5s ease; */
+  opacity: 0;
+}

@@ -56,19 +56,46 @@ document.body.onmouseup = function(event) {
               // function printMousePos(event) {
               var rejectWordAdding = document.createElement('div');
               rejectWordAdding.className = 'reject-word-adding';
-              rejectWordAdding.innerHTML = translation;
               Object.assign(rejectWordAdding.style, {
-                padding: '10px 20px',
                 position: 'absolute',
                 top: event.clientY + window.pageYOffset - 65 + 'px',
                 left: event.clientX + 'px',
-                background: '#8997ff',
                 'z-index': 99999999,
-                'box-shadow': '0px 5px 20px rgba(65, 105, 255, 0.2)',
-                color: 'white',
-                'font-weight': 'bold',
                 cursor: 'pointer'
               });
+
+              var rectangle = document.createElement('div');
+              rectangle.className = 'reject-word-adding-rectangle';
+
+              var text = document.createElement('div');
+              text.className = 'reject-word-adding-text';
+
+              var bin = document.createElement('img');
+              bin.className = 'reject-word-adding-bin';
+              bin.src = 'https://svgshare.com/i/9zH.svg';
+
+              var triangle = document.createElement('div');
+              triangle.className = 'reject-word-adding-triangle';
+
+              rejectWordAdding.appendChild(rectangle);
+              rejectWordAdding.appendChild(triangle);
+              rectangle.appendChild(text);
+              rectangle.appendChild(bin);
+
+              text.innerHTML = translation;
+
+              rectangle.onmouseover = function() {
+                text.style.opacity = '0';
+                bin.style.opacity = '1';
+              };
+
+              rectangle.onmouseout = function() {
+                text.style.opacity = '1';
+                bin.style.opacity = '0';
+              };
+
+              // rejectWordAdding.style.display = 'none';
+
               document.body.appendChild(rejectWordAdding);
               console.log(event.clientX);
               console.log(event.clientY);
