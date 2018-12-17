@@ -1,3 +1,8 @@
+.reject-word-adding {
+  opacity: 0;
+  transition: 0.3s all ease;
+}
+
 .reject-word-adding-rectangle {
   padding: 5px 20px;
   background: #8997ff;
