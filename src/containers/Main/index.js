@@ -1,3 +1,5 @@
+/* global chrome */
+
 import React from 'react';
 import './index.css';
 import settings from '../../img/settings.svg';
@@ -12,12 +14,16 @@ class Main extends React.Component {
 
     this.state = {
       openDictionary: false,
-      openSettings: false
+      openSettings: false,
+      dictionary: [{ word: 'word', translation: 'слово' }]
     };
   }
 
   dictionaryBtnClick = () => {
     this.setState({ openDictionary: !this.state.openDictionary });
+    chrome.storage.sync.get(['dictionary'], storageData => {
+      this.setState({ dictionary: storageData.dictionary });
+    });
     console.log(this.state.openDictionary);
   };
   settingsBtnClick = () => {
@@ -55,6 +61,7 @@ class Main extends React.Component {
           <Dictionary
             open={this.state.openDictionary}
             dictionaryBtnClick={this.dictionaryBtnClick}
+            dictionary={this.state.dictionary}
           />
           <WordsTillTest />
           <Settings open={this.state.openSettings} />

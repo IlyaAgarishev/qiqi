@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+
 .reject-word-adding {
   opacity: 0;
   transition: 0.3s all ease;
+}
+
+.reject-word-adding-text {
+  font-family: 'Roboto';
 }
 
 .reject-word-adding-rectangle {

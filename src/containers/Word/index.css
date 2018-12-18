@@ -1,0 +1,11 @@
+.word {
+  margin-right: 10px;
+  background: white;
+  margin-bottom: 8px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.word-fat {
+  font-weight: bold;
+}

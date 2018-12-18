@@ -100,6 +100,9 @@ document.body.onmouseup = function(event) {
 
             setTimeout(() => {
               rejectWordAdding.style.opacity = 1;
+              rectangle.onclick = function() {
+                document.body.removeChild(rejectWordAdding);
+              };
               setTimeout(() => {
                 rejectWordAdding.style.opacity = 0;
                 setTimeout(() => {
@@ -124,8 +127,6 @@ document.body.onmouseup = function(event) {
     }
   });
 };
-
-console.log(window.navigator);
 
 // document.addEventListener('click', printMousePos);
 
