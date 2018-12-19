@@ -15,16 +15,29 @@ class Main extends React.Component {
     this.state = {
       openDictionary: false,
       openSettings: false,
-      dictionary: [{ word: 'word', translation: 'слово' }]
+      dictionary: [
+        { word: 'word', translation: 'слово' },
+        { word: 'word', translation: 'слово' },
+        { word: 'word', translation: 'слово' },
+        { word: 'word', translation: 'слово' },
+        { word: 'word', translation: 'слово' },
+        { word: 'word', translation: 'слово' },
+        { word: 'word', translation: 'слово' },
+        { word: 'word', translation: 'слово' }
+      ]
     };
   }
 
-  dictionaryBtnClick = () => {
-    this.setState({ openDictionary: !this.state.openDictionary });
+  setDictionaryState = () => {
     chrome.storage.sync.get(['dictionary'], storageData => {
       this.setState({ dictionary: storageData.dictionary });
+      console.log('done');
     });
-    console.log(this.state.openDictionary);
+  };
+
+  dictionaryBtnClick = () => {
+    this.setState({ openDictionary: !this.state.openDictionary });
+    this.setDictionaryState();
   };
   settingsBtnClick = () => {
     this.setState({ openSettings: !this.state.openSettings });
@@ -34,7 +47,6 @@ class Main extends React.Component {
   };
 
   render() {
-    // console.log(this.state.openDictionary);
     return (
       <div
         className="main"
@@ -62,6 +74,7 @@ class Main extends React.Component {
             open={this.state.openDictionary}
             dictionaryBtnClick={this.dictionaryBtnClick}
             dictionary={this.state.dictionary}
+            setDictionaryState={this.setDictionaryState}
           />
           <WordsTillTest />
           <Settings open={this.state.openSettings} />

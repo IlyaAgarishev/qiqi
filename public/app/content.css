@@ -7,10 +7,11 @@
 
 .reject-word-adding-text {
   font-family: 'Roboto';
+  font-size: 16px;
 }
 
 .reject-word-adding-rectangle {
-  padding: 5px 20px;
+  padding: 10px 20px;
   background: #8997ff;
   z-index: 99999999;
   box-shadow: 0px 5px 20px rgba(65, 105, 255, 0.2);
@@ -42,6 +43,7 @@
 }
 
 .reject-word-adding-bin {
+  pointer-events: none;
   position: absolute;
   width: 15px;
   /* transition: all 0.5s ease; */

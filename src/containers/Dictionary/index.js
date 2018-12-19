@@ -21,7 +21,22 @@ class Dictionary extends React.Component {
   render() {
     return (
       <div className="dictionary" ref={ref => (this.dictionary = ref)}>
-        <img src={CloseBtn} alt="" className="close-btn" onClick={this.props.dictionaryBtnClick} />
+        <div className="dictionary-tools">
+          <div className="close-btn" onClick={this.props.dictionaryBtnClick}>
+            <img src={CloseBtn} alt="" className="close-btn-img" />
+          </div>
+          <div
+            className="clearDictionary"
+            onClick={() => {
+              chrome.storage.sync.set({ dictionary: [] }, () => {
+                console.log('dictionary has been cleared');
+                this.props.setDictionaryState();
+              });
+            }}
+          >
+            Очистить словарь
+          </div>
+        </div>
         <div className="words">
           {this.props.dictionary.map(word => {
             return <Word originalWord={word.word} translatedWord={word.translation} />;

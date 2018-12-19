@@ -101,6 +101,12 @@ document.body.onmouseup = function(event) {
             setTimeout(() => {
               rejectWordAdding.style.opacity = 1;
               rectangle.onclick = function() {
+                storageData.dictionary.pop();
+                chrome.storage.sync.set({ dictionary: storageData.dictionary }, function() {
+                  chrome.storage.sync.get(['dictionary'], function(storageData) {
+                    console.log(storageData.dictionary);
+                  });
+                });
                 document.body.removeChild(rejectWordAdding);
               };
               setTimeout(() => {
