@@ -34,12 +34,19 @@ class Dictionary extends React.Component {
               });
             }}
           >
-            Очистить словарь
+            Очистить
           </div>
         </div>
         <div className="words">
-          {this.props.dictionary.map(word => {
-            return <Word originalWord={word.word} translatedWord={word.translation} />;
+          {this.props.dictionary.map((word, index) => {
+            return (
+              <Word
+                originalWord={word.word}
+                translatedWord={word.translation}
+                index={index}
+                deleteWordFromTest={this.props.deleteWordFromTest}
+              />
+            );
           })}
         </div>
       </div>

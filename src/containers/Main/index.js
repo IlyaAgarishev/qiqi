@@ -17,13 +17,14 @@ class Main extends React.Component {
       openSettings: false,
       dictionary: [
         { word: 'word', translation: 'слово' },
+        { word: 'lord', translation: 'лорд' },
+        { word: 'ford', translation: 'форд' },
         { word: 'word', translation: 'слово' },
+        { word: 'lord', translation: 'лорд' },
+        { word: 'ford', translation: 'форд' },
         { word: 'word', translation: 'слово' },
-        { word: 'word', translation: 'слово' },
-        { word: 'word', translation: 'слово' },
-        { word: 'word', translation: 'слово' },
-        { word: 'word', translation: 'слово' },
-        { word: 'word', translation: 'слово' }
+        { word: 'lord', translation: 'лорд' },
+        { word: 'ford', translation: 'форд' }
       ]
     };
   }
@@ -35,15 +36,30 @@ class Main extends React.Component {
     });
   };
 
+  setChromeStorage = () => {
+    chrome.storage.sync.set({ dictionary: this.state.dictionary }, function() {
+      chrome.storage.sync.get(['dictionary'], function(storageData) {
+        console.log(storageData.dictionary);
+      });
+    });
+  };
+
   dictionaryBtnClick = () => {
     this.setState({ openDictionary: !this.state.openDictionary });
     this.setDictionaryState();
   };
+
   settingsBtnClick = () => {
     this.setState({ openSettings: !this.state.openSettings });
     this.state.openSettings
       ? (this.settingsImg.style.transform = 'rotate(100deg)')
       : (this.settingsImg.style.transform = 'rotate(-100deg)');
+  };
+
+  deleteWordFromTest = index => {
+    this.state.dictionary.splice(index, 1);
+    this.setChromeStorage();
+    // console.log(this.state.dictionary);
   };
 
   render() {
@@ -75,13 +91,14 @@ class Main extends React.Component {
             dictionaryBtnClick={this.dictionaryBtnClick}
             dictionary={this.state.dictionary}
             setDictionaryState={this.setDictionaryState}
+            deleteWordFromTest={this.deleteWordFromTest}
           />
           <WordsTillTest />
           <Settings open={this.state.openSettings} />
         </div>
         <div className="footer">
           <div className="dictionary-button" onClick={this.dictionaryBtnClick}>
-            <img src={book} alt="" className="book" /> Словарь
+            <img src={book} alt="" className="book" /> Слова для теста
           </div>
         </div>
       </div>

@@ -4,8 +4,14 @@
   margin-bottom: 8px;
   padding: 10px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .word-fat {
   font-weight: bold;
+}
+
+.word:hover {
+  transition: all 0.3s ease;
+  background: rgb(255, 129, 129);
 }
