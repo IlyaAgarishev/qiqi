@@ -14,7 +14,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      show: false,
+      startTest: false,
       openDictionary: false,
       openSettings: false,
       dictionary: []
@@ -53,7 +53,7 @@ class Main extends React.Component {
   };
 
   deleteWordFromTest = index => {
-    this.setState({ show: false });
+    this.setState({ startTest: false });
     this.state.dictionary.splice(index, 1);
     this.setChromeStorage();
   };
@@ -82,16 +82,17 @@ class Main extends React.Component {
           />
         </div>
         <div className="content">
-          {this.state.show ? <Quiz dictionary={this.state.dictionary} /> : null}
+          {this.state.startTest ? <Quiz dictionary={this.state.dictionary} /> : null}
 
-          {this.state.show ? null : (
-            <button
+          {this.state.startTest ? null : (
+            <div
+              className="startTest"
               onClick={() => {
-                this.setState({ show: true });
+                this.setState({ startTest: true });
               }}
             >
-              button
-            </button>
+              Начать тест
+            </div>
           )}
 
           <Dictionary

@@ -64,3 +64,8 @@
   width: 20px;
   margin-right: 5px;
 }
+
+.startTest {
+  padding: 20px;
+  background: red;
+}

@@ -8,6 +8,7 @@
 .reject-word-adding-text {
   font-family: 'Roboto';
   font-size: 16px;
+  transition: all 0.2s ease;
 }
 
 .reject-word-adding-rectangle {
@@ -21,6 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.2s ease;
 }
 
 .reject-word-adding-triangle {
@@ -30,22 +32,13 @@
   border-style: solid;
   border-width: 10px 10px 0 10px;
   border-color: #8997ff transparent transparent transparent;
-}
-
-.reject-word-adding-rectangle:hover {
-  background: rgb(255, 37, 37);
-  transition: all 0.3s ease;
-}
-
-.reject-word-adding-rectangle:hover ~ .reject-word-adding-triangle {
-  transition: all 0.3s ease;
-  border-color: rgb(255, 37, 37) transparent transparent transparent;
+  transition: all 0.2s ease;
 }
 
 .reject-word-adding-bin {
   pointer-events: none;
   position: absolute;
-  width: 15px;
-  /* transition: all 0.5s ease; */
+  width: 25px;
+  transition: all 0.2s ease;
   opacity: 0;
 }
