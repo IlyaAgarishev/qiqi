@@ -7,32 +7,28 @@ import book from '../../img/book.svg';
 import WordsTillTest from '../../containers/WordsTillTest';
 import Dictionary from '../Dictionary';
 import Settings from '../Settings';
+import Quiz from '../Quiz';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      show: false,
       openDictionary: false,
       openSettings: false,
-      dictionary: [
-        { word: 'word', translation: 'слово' },
-        { word: 'lord', translation: 'лорд' },
-        { word: 'ford', translation: 'форд' },
-        { word: 'word', translation: 'слово' },
-        { word: 'lord', translation: 'лорд' },
-        { word: 'ford', translation: 'форд' },
-        { word: 'word', translation: 'слово' },
-        { word: 'lord', translation: 'лорд' },
-        { word: 'ford', translation: 'форд' }
-      ]
+      dictionary: []
     };
+  }
+
+  componentWillMount() {
+    this.setDictionaryState();
   }
 
   setDictionaryState = () => {
     chrome.storage.sync.get(['dictionary'], storageData => {
       this.setState({ dictionary: storageData.dictionary });
-      console.log('done');
+      console.log(storageData.dictionary);
     });
   };
 
@@ -57,9 +53,9 @@ class Main extends React.Component {
   };
 
   deleteWordFromTest = index => {
+    this.setState({ show: false });
     this.state.dictionary.splice(index, 1);
     this.setChromeStorage();
-    // console.log(this.state.dictionary);
   };
 
   render() {
@@ -86,6 +82,18 @@ class Main extends React.Component {
           />
         </div>
         <div className="content">
+          {this.state.show ? <Quiz dictionary={this.state.dictionary} /> : null}
+
+          {this.state.show ? null : (
+            <button
+              onClick={() => {
+                this.setState({ show: true });
+              }}
+            >
+              button
+            </button>
+          )}
+
           <Dictionary
             open={this.state.openDictionary}
             dictionaryBtnClick={this.dictionaryBtnClick}
@@ -93,7 +101,6 @@ class Main extends React.Component {
             setDictionaryState={this.setDictionaryState}
             deleteWordFromTest={this.deleteWordFromTest}
           />
-          <WordsTillTest />
           <Settings open={this.state.openSettings} />
         </div>
         <div className="footer">

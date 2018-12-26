@@ -1,0 +1,29 @@
+.question {
+  padding: 30px;
+  background: white;
+  box-shadow: 0 0 20px 1px rgb(238, 238, 238);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.question-text {
+  color: #5e4b6e;
+  font-size: 20px;
+  font-weight: bold;
+  max-width: 300px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.checkAnswer {
+  background: #ff4a7a;
+  padding: 10px 20px;
+  border-radius: 25px;
+  margin-top: 20px;
+  color: white;
+  font-size: 16px;
+  align-self: center;
+  cursor: pointer;
+}
