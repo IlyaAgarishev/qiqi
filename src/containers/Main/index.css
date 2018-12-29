@@ -66,6 +66,27 @@
 }
 
 .startTest {
-  padding: 20px;
-  background: red;
+  padding: 15px 30px;
+  background: #0091d7;
+  border-radius: 30px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  animation: backchange 4s ease infinite;
 }
+
+/* .startTest:hover {
+  box-shadow: 0 0 10px 5px rgb(235, 235, 235);
+} */
+
+/* @keyframes backchange {
+  0% {
+    background: #0091d7;
+  }
+  50% {
+    background: #016ca1;
+  }
+  100% {
+    background: #0091d7;
+  }
+} */

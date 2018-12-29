@@ -9,7 +9,9 @@ class WordsTillTest extends React.Component {
     return (
       <div className="wordsTillTest">
         Вам осталось набрать
-        <div className="numberOfWords">5 слов</div>
+        <div className="numberOfWords">
+          {this.props.wordsLimit - this.props.dictionaryLength} слов
+        </div>
         чтобы начать тест
       </div>
     );

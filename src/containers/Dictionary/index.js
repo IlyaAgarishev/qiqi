@@ -25,15 +25,7 @@ class Dictionary extends React.Component {
           <div className="close-btn" onClick={this.props.dictionaryBtnClick}>
             <img src={CloseBtn} alt="" className="close-btn-img" />
           </div>
-          <div
-            className="clearDictionary"
-            onClick={() => {
-              chrome.storage.sync.set({ dictionary: [] }, () => {
-                console.log('dictionary has been cleared');
-                this.props.setDictionaryState();
-              });
-            }}
-          >
+          <div className="clearDictionary" onClick={this.props.clearDictionary}>
             Очистить
           </div>
         </div>

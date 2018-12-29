@@ -17,18 +17,33 @@ class Main extends React.Component {
       startTest: false,
       openDictionary: false,
       openSettings: false,
+      wordsLimit: 10,
       dictionary: []
     };
   }
 
   componentWillMount() {
+    // let syntheticDictionary = [];
+    // for (let i = 0; i < 10; i++) {
+    //   syntheticDictionary.push({ word: `Word_${i}`, translation: `Слово_${i}` });
+    // }
+    // this.setState({ dictionary: syntheticDictionary });
+
     this.setDictionaryState();
   }
 
   setDictionaryState = () => {
     chrome.storage.sync.get(['dictionary'], storageData => {
-      this.setState({ dictionary: storageData.dictionary });
-      console.log(storageData.dictionary);
+      this.setState({
+        dictionary: storageData.dictionary
+      });
+      console.log(this.state.wordsLeft);
+    });
+  };
+
+  clearDictionary = () => {
+    chrome.storage.sync.set({ dictionary: [] }, () => {
+      this.setDictionaryState();
     });
   };
 
@@ -82,17 +97,13 @@ class Main extends React.Component {
           />
         </div>
         <div className="content">
-          {this.state.startTest ? <Quiz dictionary={this.state.dictionary} /> : null}
-
-          {this.state.startTest ? null : (
-            <div
-              className="startTest"
-              onClick={() => {
-                this.setState({ startTest: true });
-              }}
-            >
-              Начать тест
-            </div>
+          {this.state.dictionary.length == this.state.wordsLimit ? (
+            <Quiz dictionary={this.state.dictionary} clearDictionary={this.clearDictionary} />
+          ) : (
+            <WordsTillTest
+              dictionaryLength={this.state.dictionary.length}
+              wordsLimit={this.state.wordsLimit}
+            />
           )}
 
           <Dictionary
@@ -101,6 +112,7 @@ class Main extends React.Component {
             dictionary={this.state.dictionary}
             setDictionaryState={this.setDictionaryState}
             deleteWordFromTest={this.deleteWordFromTest}
+            clearDictionary={this.clearDictionary}
           />
           <Settings open={this.state.openSettings} />
         </div>
