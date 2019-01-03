@@ -15,35 +15,27 @@ class Settings extends React.Component {
       this.settings.style.display = 'none';
     }
 
+    this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
+  }
+
+  disableAllWordsLimitStyle = children => {
+    for (let i = 0; i < children.length; i++) {
+      children[i].style.color = 'white';
+      children[i].style.background = '#0091d7';
+    }
+  };
+
+  enableSingleWordsLimitStyle = children => {
     chrome.storage.sync.get(['wordsLimit'], storageData => {
-      for (let i = 0; i < this.wordsLimitCells.children.length; i++) {
+      for (let i = 0; i < children.length; i++) {
         let synthIndex = i + 1;
         if (storageData.wordsLimit == synthIndex * 10) {
-          this.wordsLimitCells.children[i].style.color = '#0091d7';
-          this.wordsLimitCells.children[i].style.background = 'white';
+          children[i].style.color = '#0091d7';
+          children[i].style.background = 'white';
         }
       }
     });
-  }
-
-  // disableAllWordsLimitStyle = children => {
-  //   for (let i = 0; i < children.length; i++) {
-  //     children[i].style.color = 'white';
-  //     children[i].style.background = '#0091d7';
-  //   }
-  // };
-
-  // enableSingleWordsLimitStyle = children => {
-  //   chrome.storage.sync.get(['wordsLimit'], storageData => {
-  //     for (let i = 0; i < children.length; i++) {
-  //       let synthIndex = i + 1;
-  //       if (storageData.wordsLimit == synthIndex * 10) {
-  //         children[i].style.color = '#0091d7';
-  //         children[i].style.background = 'white';
-  //       }
-  //     }
-  //   });
-  // };
+  };
 
   // setWordsLimitSettings = (number, children) => {
   //   this.disableAllWordsLimitStyle(children);
@@ -75,7 +67,9 @@ class Settings extends React.Component {
             <div
               className="wordsLimit-cell"
               onClick={() => {
+                this.disableAllWordsLimitStyle(this.wordsLimitCells.children);
                 this.props.setWordsLimitStorage(10);
+                this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
               }}
             >
               10
@@ -83,7 +77,9 @@ class Settings extends React.Component {
             <div
               className="wordsLimit-cell"
               onClick={() => {
+                this.disableAllWordsLimitStyle(this.wordsLimitCells.children);
                 this.props.setWordsLimitStorage(20);
+                this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
               }}
             >
               20
@@ -91,7 +87,9 @@ class Settings extends React.Component {
             <div
               className="wordsLimit-cell"
               onClick={() => {
+                this.disableAllWordsLimitStyle(this.wordsLimitCells.children);
                 this.props.setWordsLimitStorage(30);
+                this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
               }}
             >
               30

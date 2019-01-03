@@ -13,13 +13,12 @@
 .wordsLimit-settings {
   display: flex;
   flex-direction: column;
-  background: #019fee;
   padding: 15px;
-  /* border-radius: 10px; */
 }
 
 .wordsLimit-settings-title {
   font-weight: 500;
+  font-size: 16px;
   color: white;
 }
 
@@ -33,14 +32,14 @@
   font-size: 22px;
   font-weight: 900;
   color: white;
-  background: #0091d7;
+  /* background: #0091d7; */
   margin-right: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 10px;
 }
 
-.wordsLimit-cell:hover {
+/* .wordsLimit-cell:hover {
   color: #0091d7;
   background: white;
-}
+} */
