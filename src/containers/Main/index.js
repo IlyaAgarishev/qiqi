@@ -17,7 +17,7 @@ class Main extends React.Component {
       startTest: false,
       openDictionary: false,
       openSettings: false,
-      wordsLimit: 10,
+      // wordsLimit: 10,
       dictionary: []
     };
   }
@@ -28,16 +28,28 @@ class Main extends React.Component {
     //   syntheticDictionary.push({ word: `Word_${i}`, translation: `Слово_${i}` });
     // }
     // this.setState({ dictionary: syntheticDictionary });
-
+    this.setWordsLimitState();
     this.setDictionaryState();
   }
+
+  setWordsLimitState = () => {
+    chrome.storage.sync.get(['wordsLimit'], storageData => {
+      this.setState({ wordsLimit: storageData.wordsLimit });
+    });
+  };
+
+  setWordsLimitStorage = number => {
+    chrome.storage.sync.set({ wordsLimit: number }, () => {
+      this.setWordsLimitState();
+      console.log(`${number} has been setted`);
+    });
+  };
 
   setDictionaryState = () => {
     chrome.storage.sync.get(['dictionary'], storageData => {
       this.setState({
         dictionary: storageData.dictionary
       });
-      console.log(this.state.wordsLeft);
     });
   };
 
@@ -114,7 +126,10 @@ class Main extends React.Component {
             deleteWordFromTest={this.deleteWordFromTest}
             clearDictionary={this.clearDictionary}
           />
-          <Settings open={this.state.openSettings} />
+          <Settings
+            open={this.state.openSettings}
+            setWordsLimitStorage={this.setWordsLimitStorage}
+          />
         </div>
         <div className="footer">
           <div className="dictionary-button" onClick={this.dictionaryBtnClick}>

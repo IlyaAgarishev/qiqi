@@ -3,7 +3,6 @@
 import React from 'react';
 import './index.css';
 import CloseBtn from '../../img/cancel.svg';
-import Masonry from 'react-masonry-component';
 import Word from '../Word';
 
 class Dictionary extends React.Component {

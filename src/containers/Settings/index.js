@@ -1,3 +1,5 @@
+/* global chrome */
+
 import React from 'react';
 import './index.css';
 
@@ -5,13 +7,49 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
   }
+
   componentDidMount() {
     if (this.props.open) {
       this.settings.style.display = 'block';
     } else {
       this.settings.style.display = 'none';
     }
+
+    chrome.storage.sync.get(['wordsLimit'], storageData => {
+      for (let i = 0; i < this.wordsLimitCells.children.length; i++) {
+        let synthIndex = i + 1;
+        if (storageData.wordsLimit == synthIndex * 10) {
+          this.wordsLimitCells.children[i].style.color = '#0091d7';
+          this.wordsLimitCells.children[i].style.background = 'white';
+        }
+      }
+    });
   }
+
+  // disableAllWordsLimitStyle = children => {
+  //   for (let i = 0; i < children.length; i++) {
+  //     children[i].style.color = 'white';
+  //     children[i].style.background = '#0091d7';
+  //   }
+  // };
+
+  // enableSingleWordsLimitStyle = children => {
+  //   chrome.storage.sync.get(['wordsLimit'], storageData => {
+  //     for (let i = 0; i < children.length; i++) {
+  //       let synthIndex = i + 1;
+  //       if (storageData.wordsLimit == synthIndex * 10) {
+  //         children[i].style.color = '#0091d7';
+  //         children[i].style.background = 'white';
+  //       }
+  //     }
+  //   });
+  // };
+
+  // setWordsLimitSettings = (number, children) => {
+  //   this.disableAllWordsLimitStyle(children);
+  //   this.props.setWordsLimitStorage(number);
+  //   this.enableSingleWordsLimitStyle(children);
+  // };
 
   shouldComponentUpdate(props) {
     if (props.open) {
@@ -31,7 +69,35 @@ class Settings extends React.Component {
   render() {
     return (
       <div className="settings" ref={ref => (this.settings = ref)}>
-        got me going crazy
+        <div className="wordsLimit-settings">
+          <div className="wordsLimit-settings-title">Количество слов в тесте :</div>
+          <div className="wordsLimit-cells" ref={ref => (this.wordsLimitCells = ref)}>
+            <div
+              className="wordsLimit-cell"
+              onClick={() => {
+                this.props.setWordsLimitStorage(10);
+              }}
+            >
+              10
+            </div>
+            <div
+              className="wordsLimit-cell"
+              onClick={() => {
+                this.props.setWordsLimitStorage(20);
+              }}
+            >
+              20
+            </div>
+            <div
+              className="wordsLimit-cell"
+              onClick={() => {
+                this.props.setWordsLimitStorage(30);
+              }}
+            >
+              30
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

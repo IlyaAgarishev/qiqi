@@ -16,7 +16,23 @@ chrome.storage.sync.get(['dictionary'], function(data) {
   }
 });
 
+let wordsLimit;
+
+chrome.storage.sync.get(['wordsLimit'], function(data) {
+  if (data.wordsLimit == undefined) {
+    chrome.storage.sync.set({ wordsLimit: 10 }, function() {
+      console.log('WordsLimit has been set');
+    });
+  } else if (typeof data.wordsLimit == 'number') {
+    console.log('wordsLimit exists');
+    wordsLimit = data.wordsLimit;
+  } else {
+    console.log('object exists but its not number');
+  }
+});
+
 document.body.onmouseup = function(event) {
+  console.log(wordsLimit);
   chrome.storage.sync.get(['dictionary'], function(storageData) {
     // console.log(storageData);
     var onlyLatingLettersRegExp = /[a-zA-Z]+/g;
@@ -54,96 +70,163 @@ document.body.onmouseup = function(event) {
             if (this.readyState != 4) return;
             var ajaxDataTranslation = JSON.parse(this.responseText);
             var translation = ajaxDataTranslation.text[0];
-
-            // Visualization of translation:
-            // reject-word-adding element
-            var rejectWordAdding = document.createElement('div');
-            rejectWordAdding.className = 'reject-word-adding';
-            Object.assign(rejectWordAdding.style, {
-              position: 'absolute',
-              top: event.clientY + window.pageYOffset - 65 + 'px',
-              left: event.clientX + 'px',
-              'z-index': 99999999,
-              cursor: 'pointer'
-            });
-            // rectangle element
-            var rectangle = document.createElement('div');
-            rectangle.className = 'reject-word-adding-rectangle';
-            // text element
-            var text = document.createElement('div');
-            text.className = 'reject-word-adding-text';
-            text.innerHTML = translation;
-            // bin element
-            var bin = document.createElement('img');
-            bin.className = 'reject-word-adding-bin';
-            bin.src = 'https://svgshare.com/i/A7B.svg';
-            // triangle element
-            var triangle = document.createElement('div');
-            triangle.className = 'reject-word-adding-triangle';
-            // appending children to elements
-            rejectWordAdding.appendChild(rectangle);
-            rejectWordAdding.appendChild(triangle);
-            rectangle.appendChild(text);
-            rectangle.appendChild(bin);
-            // showing bin when mouse over rectangle
-            rectangle.onmouseover = function() {
-              text.style.opacity = '0';
-              bin.style.opacity = '1';
-            };
-            // showing text when mouse out rectangle
-            rectangle.onmouseout = function() {
-              text.style.opacity = '1';
-              bin.style.opacity = '0';
-            };
-
-            // Check if word already exists
-            chrome.storage.sync.get(['dictionary'], function(storageData) {
-              var repeatedWord = storageData.dictionary.find(o => o.word === matchedWord[0]);
-              if (repeatedWord == undefined) {
-                return null;
-              } else {
-                rectangle.style.background = '#1CE3A7';
-                rectangle.style.cursor = 'default';
-                triangle.style.borderColor = '#1CE3A7 transparent transparent transparent';
-                rectangle.onmouseover = function() {
-                  text.style.opacity = '1';
-                  bin.style.opacity = '0';
-                };
-              }
-            });
-
-            setTimeout(() => {
-              rejectWordAdding.style.opacity = 1;
-              rectangle.onclick = function() {
-                // Check if word already exists
-                chrome.storage.sync.get(['dictionary'], function(storageData) {
-                  var repeatedWord = storageData.dictionary.find(o => o.word === matchedWord[0]);
-                  if (repeatedWord == undefined) {
-                    // Pushing translation in dictionary
-                    storageData.dictionary.push({ word: matchedWord[0], translation: translation });
-                    // Setting  dictionary to chrome local storage
-                    chrome.storage.sync.set({ dictionary: storageData.dictionary }, function() {
-                      chrome.storage.sync.get(['dictionary'], function(storageData) {
-                        console.log(storageData.dictionary);
-                      });
-                    });
-                    rectangle.style.background = '#1CE3A7';
-                    triangle.style.borderColor = '#1CE3A7 transparent transparent transparent';
-                  } else {
-                    return null;
-                  }
-                });
+            if (storageData.dictionary.length < wordsLimit) {
+              // Visualization of translation:
+              // reject-word-adding element
+              var rejectWordAdding = document.createElement('div');
+              rejectWordAdding.className = 'reject-word-adding';
+              Object.assign(rejectWordAdding.style, {
+                position: 'absolute',
+                top: event.clientY + window.pageYOffset - 65 + 'px',
+                left: event.clientX + 'px',
+                'z-index': 99999999,
+                cursor: 'pointer'
+              });
+              // rectangle element
+              var rectangle = document.createElement('div');
+              rectangle.className = 'reject-word-adding-rectangle';
+              // text element
+              var text = document.createElement('div');
+              text.className = 'reject-word-adding-text';
+              text.innerHTML = translation;
+              // bin element
+              var bin = document.createElement('img');
+              bin.className = 'reject-word-adding-bin';
+              bin.src = 'https://svgshare.com/i/A7B.svg';
+              // triangle element
+              var triangle = document.createElement('div');
+              triangle.className = 'reject-word-adding-triangle';
+              // appending children to elements
+              rejectWordAdding.appendChild(rectangle);
+              rejectWordAdding.appendChild(triangle);
+              rectangle.appendChild(text);
+              rectangle.appendChild(bin);
+              // showing bin when mouse over rectangle
+              rectangle.onmouseover = function() {
+                text.style.opacity = '0';
+                bin.style.opacity = '1';
               };
-              setTimeout(() => {
-                rejectWordAdding.style.opacity = 0;
-                setTimeout(() => {
-                  document.body.removeChild(rejectWordAdding);
-                }, 400);
-              }, 3000);
-            }, 10);
+              // showing text when mouse out rectangle
+              rectangle.onmouseout = function() {
+                text.style.opacity = '1';
+                bin.style.opacity = '0';
+              };
 
-            // Appending reject-word-adding element to body at the end
-            document.body.appendChild(rejectWordAdding);
+              // Check if word already exists
+              chrome.storage.sync.get(['dictionary'], function(storageData) {
+                var repeatedWord = storageData.dictionary.find(o => o.word === matchedWord[0]);
+                if (repeatedWord == undefined) {
+                  return null;
+                } else {
+                  rectangle.style.background = '#1CE3A7';
+                  rectangle.style.cursor = 'default';
+                  triangle.style.borderColor = '#1CE3A7 transparent transparent transparent';
+                  rectangle.onmouseover = function() {
+                    text.style.opacity = '1';
+                    bin.style.opacity = '0';
+                  };
+                }
+              });
+
+              setTimeout(() => {
+                rejectWordAdding.style.opacity = 1;
+                rectangle.onclick = function() {
+                  // Check if word already exists
+                  chrome.storage.sync.get(['dictionary'], function(storageData) {
+                    var repeatedWord = storageData.dictionary.find(o => o.word === matchedWord[0]);
+                    if (repeatedWord == undefined) {
+                      // Pushing translation in dictionary
+                      storageData.dictionary.push({
+                        word: matchedWord[0],
+                        translation: translation
+                      });
+                      // Setting  dictionary to chrome local storage
+                      chrome.storage.sync.set({ dictionary: storageData.dictionary }, function() {
+                        chrome.storage.sync.get(['dictionary'], function(storageData) {
+                          console.log(storageData.dictionary);
+                        });
+                      });
+                      rectangle.style.background = '#1CE3A7';
+                      triangle.style.borderColor = '#1CE3A7 transparent transparent transparent';
+                    } else {
+                      return null;
+                    }
+                  });
+                };
+                setTimeout(() => {
+                  rejectWordAdding.style.opacity = 0;
+                  setTimeout(() => {
+                    document.body.removeChild(rejectWordAdding);
+                  }, 400);
+                }, 3000);
+              }, 10);
+
+              // Appending reject-word-adding element to body at the end
+              document.body.appendChild(rejectWordAdding);
+            } else {
+              // reject-word-adding element
+              var finishQuiz = document.createElement('div');
+              finishQuiz.className = 'finish-quiz';
+              Object.assign(finishQuiz.style, {
+                position: 'absolute',
+                top: event.clientY + window.pageYOffset - 65 + 'px',
+                left: event.clientX + 'px',
+                'z-index': 99999999,
+                cursor: 'pointer'
+              });
+              // rectangle element
+              var rectangle = document.createElement('div');
+              rectangle.className = 'finish-quiz-rectangle';
+              // text element
+              var text = document.createElement('div');
+              text.className = 'finish-quiz-text';
+              text.innerHTML = translation;
+              // bin element
+              var bin = document.createElement('div');
+              bin.innerHTML = 'ПРОЙДИТЕ ТЕСТ';
+              // var finishTest = document.createElement('div');
+              // finishTest.innerHTML = 'Пройдите тест';
+              var arrowImg = document.createElement('img');
+              arrowImg.className = 'arrow-img';
+              arrowImg.src = 'https://svgshare.com/i/AGe.svg';
+              bin.className = 'finish-quiz-bin';
+              // bin.appendChild(finishTest);
+              bin.appendChild(arrowImg);
+              // triangle element
+              var triangle = document.createElement('div');
+              triangle.className = 'finish-quiz-triangle';
+              // appending children to elements
+              finishQuiz.appendChild(rectangle);
+              finishQuiz.appendChild(triangle);
+              rectangle.appendChild(text);
+              rectangle.appendChild(bin);
+              // showing bin when mouse over rectangle
+              rectangle.onmouseover = function() {
+                text.style.display = 'none';
+                bin.style.display = 'flex';
+              };
+              // showing text when mouse out rectangle
+              rectangle.onmouseout = function() {
+                text.style.display = 'flex';
+                bin.style.display = 'none';
+              };
+
+              setTimeout(() => {
+                finishQuiz.style.opacity = 1;
+                rectangle.onclick = function() {
+                  // console.log('link go');
+                };
+                setTimeout(() => {
+                  finishQuiz.style.opacity = 0;
+                  setTimeout(() => {
+                    document.body.removeChild(finishQuiz);
+                  }, 400);
+                }, 3000);
+              }, 10);
+
+              // Appending reject-word-adding element to body at the end
+              document.body.appendChild(finishQuiz);
+            }
           };
           xhr.send(encodedTextToTranslate);
         }

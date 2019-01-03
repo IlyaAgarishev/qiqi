@@ -1,4 +1,5 @@
 .quiz {
+  position: absolute;
   padding: 30px;
   background: white;
   box-shadow: 0 0 20px 1px rgb(238, 238, 238);
