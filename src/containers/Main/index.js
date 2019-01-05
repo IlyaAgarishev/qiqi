@@ -116,7 +116,7 @@ class Main extends React.Component {
           />
         </div>
         <div className="content">
-          {this.state.dictionary.length == this.state.wordsLimit ? (
+          {this.state.dictionary.length >= this.state.wordsLimit ? (
             <Quiz dictionary={this.state.dictionary} clearDictionary={this.clearDictionary} />
           ) : (
             <WordsTillTest

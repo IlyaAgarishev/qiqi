@@ -81,11 +81,11 @@
 }
 
 .finish-quiz-rectangle:hover {
-  background: #f3668c;
+  background: #ffa978;
 }
 
 .finish-quiz-rectangle:hover ~ .finish-quiz-triangle {
-  border-color: #f3668c transparent transparent transparent;
+  border-color: #ffa978 transparent transparent transparent;
 }
 
 .finish-quiz-bin {
@@ -96,6 +96,6 @@
 }
 
 .arrow-img {
-  width: 25px;
+  width: 17px;
   margin-left: 8px;
 }

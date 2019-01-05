@@ -4,6 +4,18 @@
 //   });
 // });
 
+// setTimeout(() => {
+//   chrome.storage.sync.set({ wordsLimit: 10 }, function() {
+//     console.log('WordsLimit has been set');
+//   });
+// }, 5000);
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  if (changes.wordsLimit) {
+    location.reload();
+  }
+});
+
 chrome.storage.sync.get(['dictionary'], function(data) {
   if (data.dictionary == undefined) {
     chrome.storage.sync.set({ dictionary: [] }, function() {
@@ -71,6 +83,7 @@ document.body.onmouseup = function(event) {
             var ajaxDataTranslation = JSON.parse(this.responseText);
             var translation = ajaxDataTranslation.text[0];
             if (storageData.dictionary.length < wordsLimit) {
+              console.log(storageData.dictionary.length + '       BIIIITCH');
               // Visualization of translation:
               // reject-word-adding element
               var rejectWordAdding = document.createElement('div');
@@ -164,6 +177,8 @@ document.body.onmouseup = function(event) {
               // Appending reject-word-adding element to body at the end
               document.body.appendChild(rejectWordAdding);
             } else {
+              console.log(storageData.dictionary.length + '       SHIIIIT');
+
               // reject-word-adding element
               var finishQuiz = document.createElement('div');
               finishQuiz.className = 'finish-quiz';

@@ -8,6 +8,7 @@
   transition: all 0.3s ease;
   opacity: 0;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .wordsLimit-settings {

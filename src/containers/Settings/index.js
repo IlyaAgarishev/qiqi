@@ -37,11 +37,11 @@ class Settings extends React.Component {
     });
   };
 
-  // setWordsLimitSettings = (number, children) => {
-  //   this.disableAllWordsLimitStyle(children);
-  //   this.props.setWordsLimitStorage(number);
-  //   this.enableSingleWordsLimitStyle(children);
-  // };
+  setWordsLimitSettings = (number, children) => {
+    this.disableAllWordsLimitStyle(children);
+    this.props.setWordsLimitStorage(number);
+    this.enableSingleWordsLimitStyle(children);
+  };
 
   shouldComponentUpdate(props) {
     if (props.open) {
@@ -67,9 +67,7 @@ class Settings extends React.Component {
             <div
               className="wordsLimit-cell"
               onClick={() => {
-                this.disableAllWordsLimitStyle(this.wordsLimitCells.children);
-                this.props.setWordsLimitStorage(10);
-                this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
+                this.setWordsLimitSettings(10, this.wordsLimitCells.children);
               }}
             >
               10
@@ -77,9 +75,7 @@ class Settings extends React.Component {
             <div
               className="wordsLimit-cell"
               onClick={() => {
-                this.disableAllWordsLimitStyle(this.wordsLimitCells.children);
-                this.props.setWordsLimitStorage(20);
-                this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
+                this.setWordsLimitSettings(20, this.wordsLimitCells.children);
               }}
             >
               20
@@ -87,9 +83,7 @@ class Settings extends React.Component {
             <div
               className="wordsLimit-cell"
               onClick={() => {
-                this.disableAllWordsLimitStyle(this.wordsLimitCells.children);
-                this.props.setWordsLimitStorage(30);
-                this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
+                this.setWordsLimitSettings(30, this.wordsLimitCells.children);
               }}
             >
               30
