@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 
-.reject-word-adding {
+.add-word {
   opacity: 0;
   transition: 0.3s all ease;
 }
 
-.reject-word-adding-text {
+.add-word-text {
   font-family: 'Roboto';
   font-size: 16px;
   transition: all 0.2s ease;
 }
 
-.reject-word-adding-rectangle {
+.add-word-rectangle {
   padding: 10px 20px;
   background: #8997ff;
   z-index: 99999999;
@@ -25,7 +25,7 @@
   transition: all 0.2s ease;
 }
 
-.reject-word-adding-triangle {
+.add-word-triangle {
   width: 0px;
   height: 0px;
   margin-left: 5px;
@@ -35,7 +35,7 @@
   transition: all 0.2s ease;
 }
 
-.reject-word-adding-bin {
+.add-word-addIcon {
   pointer-events: none;
   position: absolute;
   width: 25px;
@@ -88,7 +88,7 @@
   border-color: #ffa978 transparent transparent transparent;
 }
 
-.finish-quiz-bin {
+.finish-quiz-indication {
   pointer-events: none;
   display: none;
   align-items: center;

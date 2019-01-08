@@ -1,26 +1,18 @@
 // Check if dictionary exists
 chrome.storage.sync.get(['dictionary'], data => {
   if (data.dictionary == undefined) {
-    chrome.storage.sync.set({ dictionary: [] }, () => {
-      console.log('array just has been made');
-    });
-  } else if (Object.prototype.toString.call(data.dictionary) == '[object Array]') {
-    console.log('array exists');
+    chrome.storage.sync.set({ dictionary: [] });
   } else {
-    console.log('object exists but its not an array');
+    return null;
   }
 });
 
 // Check if wordsLimit exists
 chrome.storage.sync.get(['wordsLimit'], data => {
   if (data.wordsLimit == undefined) {
-    chrome.storage.sync.set({ wordsLimit: 10 }, () => {
-      console.log('WordsLimit has been set');
-    });
-  } else if (typeof data.wordsLimit == 'number') {
-    console.log('wordsLimit exists');
+    chrome.storage.sync.set({ wordsLimit: 10 });
   } else {
-    console.log('object exists but its not number');
+    return null;
   }
 });
 
@@ -67,47 +59,51 @@ document.body.onmouseup = event => {
                   // Check if words limit exeeded or not
                   if (storageData.dictionary.length < data.wordsLimit) {
                     // Visualization of translation:
-                    // reject-word-adding element
-                    let rejectWordAdding = document.createElement('div');
-                    rejectWordAdding.className = 'reject-word-adding';
-                    Object.assign(rejectWordAdding.style, {
+                    // add-word element
+                    let addWord = document.createElement('div');
+                    addWord.className = 'add-word';
+                    Object.assign(addWord.style, {
                       position: 'absolute',
                       top: event.clientY + window.pageYOffset - 65 + 'px',
                       left: event.clientX + 'px',
                       'z-index': 99999999,
                       cursor: 'pointer'
                     });
+
                     // rectangle element
                     let rectangle = document.createElement('div');
-                    rectangle.className = 'reject-word-adding-rectangle';
-                    // text element
-                    let text = document.createElement('div');
-                    text.className = 'reject-word-adding-text';
-                    text.innerHTML = translation;
-                    // bin element
-                    let bin = document.createElement('img');
-                    bin.className = 'reject-word-adding-bin';
-                    bin.src = 'https://svgshare.com/i/A7B.svg';
+                    rectangle.className = 'add-word-rectangle';
+                    addWord.appendChild(rectangle);
+
                     // triangle element
                     let triangle = document.createElement('div');
-                    triangle.className = 'reject-word-adding-triangle';
-                    // appending children to elements
-                    rejectWordAdding.appendChild(rectangle);
-                    rejectWordAdding.appendChild(triangle);
+                    triangle.className = 'add-word-triangle';
+                    addWord.appendChild(triangle);
+
+                    // text element
+                    let text = document.createElement('div');
+                    text.className = 'add-word-text';
+                    text.innerHTML = translation;
                     rectangle.appendChild(text);
-                    rectangle.appendChild(bin);
-                    // showing bin when mouse over rectangle
+
+                    // indication element
+                    let addIcon = document.createElement('img');
+                    addIcon.className = 'add-word-addIcon';
+                    addIcon.src = 'https://svgshare.com/i/A7B.svg';
+                    rectangle.appendChild(addIcon);
+
+                    // showing addIcon when mouse over rectangle
                     rectangle.onmouseover = () => {
                       text.style.opacity = '0';
-                      bin.style.opacity = '1';
+                      addIcon.style.opacity = '1';
                     };
                     // showing text when mouse out rectangle
                     rectangle.onmouseout = () => {
                       text.style.opacity = '1';
-                      bin.style.opacity = '0';
+                      addIcon.style.opacity = '0';
                     };
 
-                    // Check if word already exists
+                    // Check if word already exists, depends on it - change style
                     chrome.storage.sync.get(['dictionary'], storageData => {
                       let repeatedWord = storageData.dictionary.find(
                         o => o.word === matchedWord[0]
@@ -120,13 +116,13 @@ document.body.onmouseup = event => {
                         triangle.style.borderColor = '#1CE3A7 transparent transparent transparent';
                         rectangle.onmouseover = () => {
                           text.style.opacity = '1';
-                          bin.style.opacity = '0';
+                          addIcon.style.opacity = '0';
                         };
                       }
                     });
 
                     setTimeout(() => {
-                      rejectWordAdding.style.opacity = 1;
+                      addWord.style.opacity = 1;
                       rectangle.onclick = () => {
                         // Check if word already exists
                         chrome.storage.sync.get(['dictionary'], storageData => {
@@ -152,17 +148,17 @@ document.body.onmouseup = event => {
                         });
                       };
                       setTimeout(() => {
-                        rejectWordAdding.style.opacity = 0;
+                        addWord.style.opacity = 0;
                         setTimeout(() => {
-                          document.body.removeChild(rejectWordAdding);
+                          document.body.removeChild(addWord);
                         }, 400);
                       }, 3000);
                     }, 10);
 
-                    // Appending reject-word-adding element to body at the end
-                    document.body.appendChild(rejectWordAdding);
+                    // Appending add-word element to body at the end
+                    document.body.appendChild(addWord);
                   } else {
-                    // reject-word-adding element
+                    // add-word element
                     let finishQuiz = document.createElement('div');
                     finishQuiz.className = 'finish-quiz';
                     Object.assign(finishQuiz.style, {
@@ -172,41 +168,45 @@ document.body.onmouseup = event => {
                       'z-index': 99999999,
                       cursor: 'pointer'
                     });
+
                     // rectangle element
                     let rectangle = document.createElement('div');
                     rectangle.className = 'finish-quiz-rectangle';
+                    finishQuiz.appendChild(rectangle);
+
                     // text element
                     let text = document.createElement('div');
                     text.className = 'finish-quiz-text';
                     text.innerHTML = translation;
-                    // bin element
-                    let bin = document.createElement('div');
-                    bin.innerHTML = 'ПРОЙДИТЕ ТЕСТ';
-                    // let finishTest = document.createElement('div');
-                    // finishTest.innerHTML = 'Пройдите тест';
+                    rectangle.appendChild(text);
+
+                    // indication element
+                    let indication = document.createElement('div');
+                    indication.innerHTML = 'ПРОЙДИТЕ ТЕСТ';
+                    indication.className = 'finish-quiz-indication';
+
+                    // arrow img element
                     let arrowImg = document.createElement('img');
                     arrowImg.className = 'arrow-img';
                     arrowImg.src = 'https://svgshare.com/i/AGe.svg';
-                    bin.className = 'finish-quiz-bin';
-                    // bin.appendChild(finishTest);
-                    bin.appendChild(arrowImg);
+                    indication.appendChild(arrowImg);
+                    rectangle.appendChild(indication);
+
                     // triangle element
                     let triangle = document.createElement('div');
                     triangle.className = 'finish-quiz-triangle';
-                    // appending children to elements
-                    finishQuiz.appendChild(rectangle);
                     finishQuiz.appendChild(triangle);
-                    rectangle.appendChild(text);
-                    rectangle.appendChild(bin);
-                    // showing bin when mouse over rectangle
+
+                    // appending children to elements
+                    // showing indication when mouse over rectangle
                     rectangle.onmouseover = () => {
                       text.style.display = 'none';
-                      bin.style.display = 'flex';
+                      indication.style.display = 'flex';
                     };
                     // showing text when mouse out rectangle
                     rectangle.onmouseout = () => {
                       text.style.display = 'flex';
-                      bin.style.display = 'none';
+                      indication.style.display = 'none';
                     };
 
                     setTimeout(() => {
@@ -219,7 +219,7 @@ document.body.onmouseup = event => {
                       }, 3000);
                     }, 10);
 
-                    // Appending reject-word-adding element to body at the end
+                    // Appending add-word element to body at the end
                     document.body.appendChild(finishQuiz);
                   }
                 });
@@ -228,8 +228,6 @@ document.body.onmouseup = event => {
           }
         }
       );
-    } else if (matchedWord.length > 1) {
-      console.log('please choose only one word');
     } else {
       return null;
     }
