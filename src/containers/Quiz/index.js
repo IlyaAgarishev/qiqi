@@ -1,14 +1,14 @@
-import React from 'react';
-import './index.css';
-import Answer from '../Answer';
-import Adjectives from '../../RussianDictionary/adjectives.js';
-import Adverbs from '../../RussianDictionary/adverbs.js';
-import Conjunctions from '../../RussianDictionary/conjunctions.js';
-import Nouns from '../../RussianDictionary/nouns.js';
-import Numerous from '../../RussianDictionary/numerous.js';
-import Prepositions from '../../RussianDictionary/prepositions.js';
-import Pronouns from '../../RussianDictionary/pronouns.js';
-import Verbs from '../../RussianDictionary/verbs.js';
+import React from "react";
+import "./index.css";
+import Answer from "../Answer";
+import Adjectives from "../../RussianDictionary/adjectives.js";
+import Adverbs from "../../RussianDictionary/adverbs.js";
+import Conjunctions from "../../RussianDictionary/conjunctions.js";
+import Nouns from "../../RussianDictionary/nouns.js";
+import Numerous from "../../RussianDictionary/numerous.js";
+import Prepositions from "../../RussianDictionary/prepositions.js";
+import Pronouns from "../../RussianDictionary/pronouns.js";
+import Verbs from "../../RussianDictionary/verbs.js";
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -48,36 +48,36 @@ class Quiz extends React.Component {
   smartAnswersCreator = rightAnswer => {
     var xhr = new XMLHttpRequest();
     xhr.open(
-      'GET',
+      "GET",
       `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20181222T134922Z.9d94e99b6da5e84a.19d04de00934554d34f2a675f0100fd307a76107&lang=ru-en&text=${rightAnswer}`,
       false
     );
     xhr.send();
     if (xhr.status != 200) {
-      console.log(xhr.status + ': ' + xhr.statusText);
+      console.log(xhr.status + ": " + xhr.statusText);
     } else {
       var data = JSON.parse(xhr.responseText);
       if (data.def.length == 0) {
-        var partOfSpeach = 'noun';
+        var partOfSpeach = "noun";
       } else {
         var partOfSpeach = data.def[0].pos;
       }
 
-      if (partOfSpeach == 'adjective') {
+      if (partOfSpeach == "adjective") {
         return this.createAnswersArray(Adjectives, rightAnswer);
-      } else if (partOfSpeach == 'adverb') {
+      } else if (partOfSpeach == "adverb") {
         return this.createAnswersArray(Adverbs, rightAnswer);
-      } else if (partOfSpeach == 'conjunction' || partOfSpeach == 'particle') {
+      } else if (partOfSpeach == "conjunction" || partOfSpeach == "particle") {
         return this.createAnswersArray(Conjunctions, rightAnswer);
-      } else if (partOfSpeach == 'noun') {
+      } else if (partOfSpeach == "noun") {
         return this.createAnswersArray(Nouns, rightAnswer);
-      } else if (partOfSpeach == 'numeral') {
+      } else if (partOfSpeach == "numeral") {
         return this.createAnswersArray(Numerous, rightAnswer);
-      } else if (partOfSpeach == 'preposition') {
+      } else if (partOfSpeach == "preposition") {
         return this.createAnswersArray(Prepositions, rightAnswer);
-      } else if (partOfSpeach == 'pronoun') {
+      } else if (partOfSpeach == "pronoun") {
         return this.createAnswersArray(Pronouns, rightAnswer);
-      } else if (partOfSpeach == 'verb') {
+      } else if (partOfSpeach == "verb") {
         return this.createAnswersArray(Verbs, rightAnswer);
       } else {
         return this.createAnswersArray(Nouns, rightAnswer);
@@ -130,7 +130,9 @@ class Quiz extends React.Component {
           this.quiz = ref;
         }}
       >
-        <div className="question-text">"{this.state.questionWord}" переводится как ?</div>
+        <div className="question-text">
+          "{this.state.questionWord}" переводится как ?
+        </div>
         <form
           className="answers"
           ref={ref => {
@@ -145,11 +147,11 @@ class Quiz extends React.Component {
                 key={index}
                 answerId={
                   this.state.questionWord +
-                  '_' +
+                  "_" +
                   element.answer +
-                  '_' +
+                  "_" +
                   index +
-                  '_' +
+                  "_" +
                   Math.floor(Math.random(0, 1) * 1000)
                 }
                 ref={ref => {
@@ -166,18 +168,20 @@ class Quiz extends React.Component {
           }}
           onClick={() => {
             if (this.state.selectedAnswer == this.state.rightAnswer) {
-              this.quiz.style.background = '#3FFFA6';
+              this.quiz.style.background = "#3FFFA6";
               setTimeout(() => {
                 this.setState({ questionIndex: this.state.questionIndex + 1 });
                 if (this.state.questionIndex != this.state.wordsToTest.length) {
                   this.setState({
-                    questionWord: this.state.wordsToTest[this.state.questionIndex].word,
+                    questionWord: this.state.wordsToTest[
+                      this.state.questionIndex
+                    ].word,
                     rightAnswer: this.state.wordsToTest[
                       this.state.questionIndex
                     ].translation.toLowerCase()
                   });
                   this.finalAnswersArrayGenerator(this.state.rightAnswer);
-                  this.quiz.style.background = 'white';
+                  this.quiz.style.background = "white";
                   this.uncheckRadioInputs(this.quiz.children[1].children);
                 } else {
                   this.props.clearDictionary();
@@ -185,9 +189,9 @@ class Quiz extends React.Component {
               }, 700);
             } else {
               this.uncheckRadioInputs(this.quiz.children[1].children);
-              this.quiz.style.background = '#ff6c6c';
+              this.quiz.style.background = "#ff6c6c";
               setTimeout(() => {
-                this.quiz.style.background = 'white';
+                this.quiz.style.background = "white";
               }, 150);
             }
           }}

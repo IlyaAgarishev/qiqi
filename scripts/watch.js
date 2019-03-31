@@ -8,6 +8,13 @@ const config = require("react-scripts/config/webpack.config.dev.js");
 // removes react-dev-utils/webpackHotDevClient.js at first in the array
 config.entry.shift();
 
+config.entry = config.entry.filter(
+  entry => !entry.includes("webpackHotDevClient")
+);
+
+config.output.path = paths.appBuild;
+paths.publicUrl = paths.appBuild + "/";
+
 webpack(config).watch({}, (err, stats) => {
   if (err) {
     console.error(err);

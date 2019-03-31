@@ -1,13 +1,13 @@
 /* global chrome */
 
-import React from 'react';
-import './index.css';
-import settings from '../../img/settings.svg';
-import book from '../../img/book.svg';
-import WordsTillTest from '../../containers/WordsTillTest';
-import Dictionary from '../Dictionary';
-import Settings from '../Settings';
-import Quiz from '../Quiz';
+import React from "react";
+import "./index.css";
+import settings from "../../img/settings.svg";
+import book from "../../img/book.svg";
+import WordsTillTest from "../../containers/WordsTillTest";
+import Dictionary from "../Dictionary";
+import Settings from "../Settings";
+import Quiz from "../Quiz";
 
 class Main extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class Main extends React.Component {
   }
 
   setWordsLimitState = () => {
-    chrome.storage.sync.get(['wordsLimit'], storageData => {
+    chrome.storage.sync.get(["wordsLimit"], storageData => {
       this.setState({ wordsLimit: storageData.wordsLimit });
     });
   };
@@ -46,7 +46,7 @@ class Main extends React.Component {
   };
 
   setDictionaryState = () => {
-    chrome.storage.sync.get(['dictionary'], storageData => {
+    chrome.storage.sync.get(["dictionary"], storageData => {
       this.setState({
         dictionary: storageData.dictionary
       });
@@ -61,7 +61,7 @@ class Main extends React.Component {
 
   setChromeStorage = () => {
     chrome.storage.sync.set({ dictionary: this.state.dictionary }, function() {
-      chrome.storage.sync.get(['dictionary'], function(storageData) {
+      chrome.storage.sync.get(["dictionary"], function(storageData) {
         console.log(storageData.dictionary);
       });
     });
@@ -75,8 +75,8 @@ class Main extends React.Component {
   settingsBtnClick = () => {
     this.setState({ openSettings: !this.state.openSettings });
     this.state.openSettings
-      ? (this.settingsImg.style.transform = 'rotate(100deg)')
-      : (this.settingsImg.style.transform = 'rotate(-100deg)');
+      ? (this.settingsImg.style.transform = "rotate(100deg)")
+      : (this.settingsImg.style.transform = "rotate(-100deg)");
   };
 
   deleteWordFromTest = index => {
@@ -91,17 +91,17 @@ class Main extends React.Component {
         className="main"
         onClick={event => {
           if (
-            event.target.className == 'settings' ||
-            event.target.className == 'settings-img' ||
-            event.target.className == 'wordsLimit-settings' ||
-            event.target.className == 'wordsLimit-settings-title' ||
-            event.target.className == 'wordsLimit-cells' ||
-            event.target.className == 'wordsLimit-cell'
+            event.target.className == "settings" ||
+            event.target.className == "settings-img" ||
+            event.target.className == "wordsLimit-settings" ||
+            event.target.className == "wordsLimit-settings-title" ||
+            event.target.className == "wordsLimit-cells" ||
+            event.target.className == "wordsLimit-cell"
           ) {
             return null;
           } else {
             this.setState({ openSettings: false });
-            this.settingsImg.style.transform = 'rotate(100deg)';
+            this.settingsImg.style.transform = "rotate(100deg)";
           }
         }}
       >
@@ -117,7 +117,10 @@ class Main extends React.Component {
         </div>
         <div className="content">
           {this.state.dictionary.length >= this.state.wordsLimit ? (
-            <Quiz dictionary={this.state.dictionary} clearDictionary={this.clearDictionary} />
+            <Quiz
+              dictionary={this.state.dictionary}
+              clearDictionary={this.clearDictionary}
+            />
           ) : (
             <WordsTillTest
               dictionaryLength={this.state.dictionary.length}
