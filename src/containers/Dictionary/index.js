@@ -1,9 +1,9 @@
 /* global chrome */
 
-import React from 'react';
-import './index.css';
-import CloseBtn from '../../img/cancel.svg';
-import Word from '../Word';
+import React from "react";
+import "./index.css";
+import CloseBtn from "../../img/cancel.svg";
+import Word from "../Word";
 
 class Dictionary extends React.Component {
   constructor(props) {
@@ -12,8 +12,8 @@ class Dictionary extends React.Component {
 
   shouldComponentUpdate(props) {
     props.open
-      ? (this.dictionary.style.transform = 'translate(0, -600px)')
-      : (this.dictionary.style.transform = 'translate(0, 0px)');
+      ? (this.dictionary.style.transform = "translate(0, -600px)")
+      : (this.dictionary.style.transform = "translate(0, 0px)");
     return true;
   }
 

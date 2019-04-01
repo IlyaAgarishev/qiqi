@@ -1,7 +1,7 @@
 /* global chrome */
 
-import React from 'react';
-import './index.css';
+import React from "react";
+import "./index.css";
 
 class Settings extends React.Component {
   constructor(props) {
@@ -10,9 +10,9 @@ class Settings extends React.Component {
 
   componentDidMount() {
     if (this.props.open) {
-      this.settings.style.display = 'block';
+      this.settings.style.display = "block";
     } else {
-      this.settings.style.display = 'none';
+      this.settings.style.display = "none";
     }
 
     this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
@@ -20,18 +20,18 @@ class Settings extends React.Component {
 
   disableAllWordsLimitStyle = children => {
     for (let i = 0; i < children.length; i++) {
-      children[i].style.color = 'white';
-      children[i].style.background = '#0091d7';
+      children[i].style.color = "white";
+      children[i].style.background = "#0091d7";
     }
   };
 
   enableSingleWordsLimitStyle = children => {
-    chrome.storage.sync.get(['wordsLimit'], storageData => {
+    chrome.storage.sync.get(["wordsLimit"], storageData => {
       for (let i = 0; i < children.length; i++) {
         let synthIndex = i + 1;
         if (storageData.wordsLimit == synthIndex * 10) {
-          children[i].style.color = '#0091d7';
-          children[i].style.background = 'white';
+          children[i].style.color = "#0091d7";
+          children[i].style.background = "white";
         }
       }
     });
@@ -45,14 +45,14 @@ class Settings extends React.Component {
 
   shouldComponentUpdate(props) {
     if (props.open) {
-      this.settings.style.display = 'block';
+      this.settings.style.display = "block";
       setTimeout(() => {
-        this.settings.style.opacity = '1';
+        this.settings.style.opacity = "1";
       }, 10);
     } else {
-      this.settings.style.opacity = '0';
+      this.settings.style.opacity = "0";
       setTimeout(() => {
-        this.settings.style.display = 'none';
+        this.settings.style.display = "none";
       }, 300);
     }
     return true;
@@ -62,8 +62,13 @@ class Settings extends React.Component {
     return (
       <div className="settings" ref={ref => (this.settings = ref)}>
         <div className="wordsLimit-settings">
-          <div className="wordsLimit-settings-title">Количество слов в тесте :</div>
-          <div className="wordsLimit-cells" ref={ref => (this.wordsLimitCells = ref)}>
+          <div className="wordsLimit-settings-title">
+            Количество слов в тесте :
+          </div>
+          <div
+            className="wordsLimit-cells"
+            ref={ref => (this.wordsLimitCells = ref)}
+          >
             <div
               className="wordsLimit-cell"
               onClick={() => {

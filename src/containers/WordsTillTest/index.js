@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.css';
+import React from "react";
+import "./index.css";
 
 class WordsTillTest extends React.Component {
   constructor(props) {

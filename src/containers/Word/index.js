@@ -1,6 +1,6 @@
-import React from 'react';
-import './index.css';
-import CloseBtn from '../../img/cancel.svg';
+import React from "react";
+import "./index.css";
+import CloseBtn from "../../img/cancel.svg";
 
 class Word extends React.Component {
   constructor(props) {

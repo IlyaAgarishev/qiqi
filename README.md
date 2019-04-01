@@ -15,5 +15,5 @@ Google chrome extension to learn english effectively. You can translate word and
 ### How to use
 
 1.  Use `yarn install` to install node-modules
-2.  Use `yarn build` to start the project
+2.  Use `yarn build` to build the project
 3.  Go to chrome://extensions/ , than upload build folder
