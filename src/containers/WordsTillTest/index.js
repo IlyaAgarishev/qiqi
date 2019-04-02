@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
 const tryMetryMe = (wordsLimit, dictionaryLength) => {
@@ -21,9 +21,9 @@ const WordsTillTest = props => {
   const { wordsLimit, dictionaryLength } = { ...props };
   let wordsLeftString = tryMetryMe(wordsLimit, dictionaryLength);
   return (
-    <div className="wordsTillTest">
+    <div className={styles.wordsTillTest}>
       Вам осталось набрать
-      <div className="numberOfWords">{wordsLeftString}</div>
+      <div className={styles.numberOfWords}>{wordsLeftString}</div>
       чтобы начать тест
     </div>
   );
