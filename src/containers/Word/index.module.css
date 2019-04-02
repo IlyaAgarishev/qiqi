@@ -7,10 +7,6 @@
   cursor: pointer;
 }
 
-.wordFat {
-  font-weight: bold;
-}
-
 .word:hover {
   transition: all 0.3s ease;
   background: rgb(255, 129, 129);

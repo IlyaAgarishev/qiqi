@@ -1,7 +1,7 @@
 /* global chrome */
 
 import React from "react";
-import "./index.css";
+import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
 class Settings extends React.Component {
@@ -57,17 +57,17 @@ class Settings extends React.Component {
 
   render() {
     return (
-      <div className="settings" ref={ref => (this.settings = ref)}>
-        <div className="wordsLimit-settings">
-          <div className="wordsLimit-settings-title">
+      <div className={styles.settings} ref={ref => (this.settings = ref)}>
+        <div className={styles.wordsLimitSettings}>
+          <div className={styles.wordsLimitSettingsTitle}>
             Количество слов в тесте :
           </div>
           <div
-            className="wordsLimit-cells"
+            className={styles.wordsLimitCells}
             ref={ref => (this.wordsLimitCells = ref)}
           >
             <div
-              className="wordsLimit-cell"
+              className={styles.wordsLimitCell}
               onClick={() => {
                 this.setWordsLimitSettings(10, this.wordsLimitCells.children);
               }}
@@ -75,7 +75,7 @@ class Settings extends React.Component {
               10
             </div>
             <div
-              className="wordsLimit-cell"
+              className={styles.wordsLimitCell}
               onClick={() => {
                 this.setWordsLimitSettings(20, this.wordsLimitCells.children);
               }}
@@ -83,7 +83,7 @@ class Settings extends React.Component {
               20
             </div>
             <div
-              className="wordsLimit-cell"
+              className={styles.wordsLimitCell}
               onClick={() => {
                 this.setWordsLimitSettings(30, this.wordsLimitCells.children);
               }}
