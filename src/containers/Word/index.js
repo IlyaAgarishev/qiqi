@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import PropTypes from "prop-types";
 
 const Word = props => {
   const { index, deleteWordFromTest, originalWord, translatedWord } = {
@@ -17,4 +18,12 @@ const Word = props => {
     </div>
   );
 };
+
+Word.propTypes = {
+  index: PropTypes.number.isRequired,
+  deleteWordFromTest: PropTypes.func.isRequired,
+  originalWord: PropTypes.string.isRequired,
+  translatedWord: PropTypes.string.isRequired
+};
+
 export default Word;
