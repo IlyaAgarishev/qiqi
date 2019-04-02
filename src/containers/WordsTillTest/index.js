@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import PropTypes from "prop-types";
 
 const tryMetryMe = (wordsLimit, dictionaryLength) => {
   let wordsLeft = wordsLimit - dictionaryLength;
@@ -27,4 +28,10 @@ const WordsTillTest = props => {
     </div>
   );
 };
+
+WordsTillTest.propTypes = {
+  wordsLimit: PropTypes.number.isRequired,
+  dictionaryLength: PropTypes.number.isRequired
+};
+
 export default WordsTillTest;
