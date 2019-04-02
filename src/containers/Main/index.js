@@ -41,7 +41,6 @@ class Main extends React.Component {
   setWordsLimitStorage = number => {
     chrome.storage.sync.set({ wordsLimit: number }, () => {
       this.setWordsLimitState();
-      console.log(`${number} has been setted`);
     });
   };
 

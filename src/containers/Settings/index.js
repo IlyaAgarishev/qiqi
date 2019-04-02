@@ -2,6 +2,7 @@
 
 import React from "react";
 import "./index.css";
+import PropTypes from "prop-types";
 
 class Settings extends React.Component {
   componentDidMount() {
@@ -95,5 +96,10 @@ class Settings extends React.Component {
     );
   }
 }
+
+Settings.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setWordsLimitStorage: PropTypes.func.isRequired
+};
 
 export default Settings;
