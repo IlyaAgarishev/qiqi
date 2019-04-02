@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
 const Word = props => {
@@ -8,13 +8,13 @@ const Word = props => {
   };
   return (
     <div
-      className="word"
+      className={styles.word}
       onClick={() => {
         deleteWordFromTest(index);
       }}
     >
-      <div className="word-fat">{originalWord}</div>
-      <div className="word-translation">{translatedWord}</div>
+      <strong>{originalWord}</strong>
+      <div>{translatedWord}</div>
     </div>
   );
 };
