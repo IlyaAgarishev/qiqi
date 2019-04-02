@@ -31,7 +31,6 @@ document.body.onmouseup = event => {
       chrome.runtime.sendMessage(
         { contentScriptQuery: "langDetection", word: matchedWord[0] },
         responseText => {
-          console.log(responseText);
           let ajaxDataDetection = JSON.parse(responseText);
           // Process of checking word lang origin
           if (ajaxDataDetection.lang == "en") {
