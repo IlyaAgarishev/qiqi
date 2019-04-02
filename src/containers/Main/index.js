@@ -91,12 +91,12 @@ class Main extends React.Component {
         className="main"
         onClick={event => {
           if (
-            event.target.className == "settings" ||
-            event.target.className == "settings-img" ||
-            event.target.className == "wordsLimit-settings" ||
-            event.target.className == "wordsLimit-settings-title" ||
-            event.target.className == "wordsLimit-cells" ||
-            event.target.className == "wordsLimit-cell"
+            event.target.className === "settings" ||
+            event.target.className === "settings-img" ||
+            event.target.className === "wordsLimit-settings" ||
+            event.target.className === "wordsLimit-settings-title" ||
+            event.target.className === "wordsLimit-cells" ||
+            event.target.className === "wordsLimit-cell"
           ) {
             return null;
           } else {

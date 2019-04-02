@@ -4,10 +4,6 @@ import React from "react";
 import "./index.css";
 
 class Settings extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if (this.props.open) {
       this.settings.style.display = "block";
@@ -29,7 +25,7 @@ class Settings extends React.Component {
     chrome.storage.sync.get(["wordsLimit"], storageData => {
       for (let i = 0; i < children.length; i++) {
         let synthIndex = i + 1;
-        if (storageData.wordsLimit == synthIndex * 10) {
+        if (storageData.wordsLimit === synthIndex * 10) {
           children[i].style.color = "#0091d7";
           children[i].style.background = "white";
         }

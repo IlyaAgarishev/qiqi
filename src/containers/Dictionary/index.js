@@ -1,15 +1,9 @@
-/* global chrome */
-
 import React from "react";
 import "./index.css";
 import CloseBtn from "../../img/cancel.svg";
 import Word from "../Word";
 
 class Dictionary extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   shouldComponentUpdate(props) {
     props.open
       ? (this.dictionary.style.transform = "translate(0, -600px)")
