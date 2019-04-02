@@ -7,7 +7,7 @@ import book from "../../img/book.svg";
 import WordsTillTest from "../../containers/WordsTillTest";
 import Dictionary from "../Dictionary";
 import Settings from "../Settings";
-import Quiz from "../Quiz";
+import Quiz from "react-random-quiz";
 
 class Main extends React.Component {
   constructor(props) {
@@ -117,10 +117,7 @@ class Main extends React.Component {
         </div>
         <div className="content">
           {this.state.dictionary.length >= this.state.wordsLimit ? (
-            <Quiz
-              dictionary={this.state.dictionary}
-              clearDictionary={this.clearDictionary}
-            />
+            <Quiz wordsToTest={this.state.dictionary} />
           ) : (
             <WordsTillTest
               dictionaryLength={this.state.dictionary.length}
