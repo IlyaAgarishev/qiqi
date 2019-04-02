@@ -16,19 +16,6 @@ chrome.storage.sync.get(["wordsLimit"], data => {
   }
 });
 
-// Creating pattern ajax post request
-ajaxPostRequest = (text, url, callback) => {
-  let xhr = new XMLHttpRequest();
-  let encodedTextToDetect = "text=" + encodeURIComponent(text);
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function() {
-    if (this.readyState != 4) return;
-    callback(this.responseText);
-  };
-  xhr.send(encodedTextToDetect);
-};
-
 document.body.onmouseup = event => {
   chrome.storage.sync.get(["dictionary"], storageData => {
     let onlyLatingLettersRegExp = /[a-zA-Z]+/g;
@@ -41,17 +28,16 @@ document.body.onmouseup = event => {
     if (matchedWord != null && matchedWord.length == 1) {
       // Check if selected word has english origin
       // AJAX REQUEST TO DETECT LANGUAGE
-      ajaxPostRequest(
-        matchedWord[0],
-        "https://translate.yandex.net/api/v1.5/tr.json/detect?,de&key=trnsl.1.1.20181216T030612Z.d437d4b4c93ec8c2.96b6e7d804c8eb9b7aaf3c69cac4fd25abab90c2",
+      chrome.runtime.sendMessage(
+        { contentScriptQuery: "langDetection", word: matchedWord[0] },
         responseText => {
+          console.log(responseText);
           let ajaxDataDetection = JSON.parse(responseText);
           // Process of checking word lang origin
           if (ajaxDataDetection.lang == "en") {
             // AJAX REQUEST TO TRANSLATE WORD
-            ajaxPostRequest(
-              matchedWord[0],
-              "https://translate.yandex.net/api/v1.5/tr.json/translate?lang=en-ru&key=trnsl.1.1.20181216T030612Z.d437d4b4c93ec8c2.96b6e7d804c8eb9b7aaf3c69cac4fd25abab90c2",
+            chrome.runtime.sendMessage(
+              { contentScriptQuery: "translation", word: matchedWord[0] },
               responseText => {
                 let ajaxDataTranslation = JSON.parse(responseText);
                 let translation = ajaxDataTranslation.text[0];
