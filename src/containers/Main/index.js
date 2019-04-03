@@ -73,9 +73,6 @@ class Main extends React.Component {
 
   settingsBtnClick = () => {
     this.setState({ openSettings: !this.state.openSettings });
-    this.state.openSettings
-      ? (this.settingsImg.style.transform = "rotate(100deg)")
-      : (this.settingsImg.style.transform = "rotate(-100deg)");
   };
 
   deleteWordFromTest = index => {
@@ -90,18 +87,13 @@ class Main extends React.Component {
         className={styles.main}
         onClick={event => {
           if (
-            event.target.className.split("_")[1] === "settings" ||
-            event.target.className.split("_")[1] === "settingsImg" ||
-            event.target.className.split("_")[1] === "wordsLimitSettings" ||
-            event.target.className.split("_")[1] ===
-              "wordsLimitSettingsTitle" ||
-            event.target.className.split("_")[1] === "wordsLimitCells" ||
-            event.target.className.split("_")[1] === "wordsLimitCell"
+            event.target.className.split("_")[0] === "Settings" ||
+            event.target.className.split("_")[0] === "WordsLimitCell" ||
+            event.target.className.split("_")[1] === "settingsImg"
           ) {
             return null;
           } else {
             this.setState({ openSettings: false });
-            this.settingsImg.style.transform = "rotate(100deg)";
           }
         }}
       >
@@ -110,8 +102,15 @@ class Main extends React.Component {
           <img
             src={settings}
             alt=""
-            className={styles.settingsImg}
-            ref={ref => (this.settingsImg = ref)}
+            className={
+              this.state.openSettings
+                ? [styles.settingsImg, styles.settingsImgTransformPlus].join(
+                    " "
+                  )
+                : [styles.settingsImg, styles.settingsImgTransformMinus].join(
+                    " "
+                  )
+            }
             onClick={this.settingsBtnClick}
           />
         </div>

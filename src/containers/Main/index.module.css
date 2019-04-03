@@ -27,6 +27,13 @@
   transition: all 0.5s ease;
 }
 
+.settingsImgTransformPlus {
+  transform: rotate(100deg);
+}
+.settingsImgTransformMinus {
+  transform: rotate(-100deg);
+}
+
 .content {
   /* background: #8997ff; */
   height: 100%;
