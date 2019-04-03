@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import styles from "./index.module.css";
 import CloseBtn from "../../img/cancel.svg";
 import Word from "../Word";
 
@@ -13,16 +13,22 @@ class Dictionary extends React.Component {
 
   render() {
     return (
-      <div className="dictionary" ref={ref => (this.dictionary = ref)}>
-        <div className="dictionary-tools">
-          <div className="close-btn" onClick={this.props.dictionaryBtnClick}>
-            <img src={CloseBtn} alt="" className="close-btn-img" />
+      <div className={styles.dictionary} ref={ref => (this.dictionary = ref)}>
+        <div className={styles.dictionaryTools}>
+          <div
+            className={styles.closeBtn}
+            onClick={this.props.dictionaryBtnClick}
+          >
+            <img src={CloseBtn} alt="" className={styles.closeBtnImg} />
           </div>
-          <div className="clearDictionary" onClick={this.props.clearDictionary}>
+          <div
+            className={styles.clearDictionary}
+            onClick={this.props.clearDictionary}
+          >
             Очистить
           </div>
         </div>
-        <div className="words">
+        <div className={styles.words}>
           {this.props.dictionary.map((word, index) => {
             return (
               <Word

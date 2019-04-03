@@ -12,7 +12,7 @@
   transition: all 0.5s ease;
 }
 
-.dictionary-tools {
+.dictionaryTools {
   width: 100%;
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@
   position: absolute;
 }
 
-.close-btn {
+.closeBtn {
   cursor: pointer;
   /* position: fixed; */
   align-self: flex-start;
@@ -34,11 +34,11 @@
   align-items: center;
 }
 
-.close-btn-img {
+.closeBtnImg {
   width: 20px;
 }
 
-.close-btn:hover {
+.closeBtn:hover {
   transition: all 0.5s ease;
   background: rgb(122, 134, 223);
 }
