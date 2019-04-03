@@ -3,97 +3,57 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
+import WordsLimitCell from "../WordsLimitCell";
 
 class Settings extends React.Component {
-  componentDidMount() {
-    if (this.props.open) {
-      this.settings.style.display = "block";
-    } else {
-      this.settings.style.display = "none";
-    }
+  constructor(props) {
+    super(props);
 
-    this.enableSingleWordsLimitStyle(this.wordsLimitCells.children);
+    this.state = {
+      certainCell: null
+    };
   }
 
-  disableAllWordsLimitStyle = children => {
-    for (let i = 0; i < children.length; i++) {
-      children[i].style.color = "white";
-      children[i].style.background = "#0091d7";
-    }
-  };
-
-  enableSingleWordsLimitStyle = children => {
+  componentWillMount() {
     chrome.storage.sync.get(["wordsLimit"], storageData => {
-      for (let i = 0; i < children.length; i++) {
-        let synthIndex = i + 1;
-        if (storageData.wordsLimit === synthIndex * 10) {
-          children[i].style.color = "#0091d7";
-          children[i].style.background = "white";
-        }
-      }
+      this.certainCellSetter(storageData.wordsLimit);
     });
-  };
-
-  setWordsLimitSettings = (number, children) => {
-    this.disableAllWordsLimitStyle(children);
-    this.props.setWordsLimitStorage(number);
-    this.enableSingleWordsLimitStyle(children);
-  };
-
-  shouldComponentUpdate(props) {
-    if (props.open) {
-      this.settings.style.display = "block";
-      setTimeout(() => {
-        this.settings.style.opacity = "1";
-      }, 10);
-    } else {
-      this.settings.style.opacity = "0";
-      setTimeout(() => {
-        this.settings.style.display = "none";
-      }, 300);
-    }
-    return true;
   }
+
+  certainCellSetter = index => {
+    this.setState({ certainCell: index });
+  };
 
   render() {
-    return (
-      <div className={styles.settings} ref={ref => (this.settings = ref)}>
+    return this.props.open ? (
+      <div className={styles.settings}>
         <div className={styles.wordsLimitSettings}>
           <div className={styles.wordsLimitSettingsTitle}>
             Количество слов в тесте :
           </div>
-          <div
-            className={styles.wordsLimitCells}
-            ref={ref => (this.wordsLimitCells = ref)}
-          >
-            <div
-              className={styles.wordsLimitCell}
-              onClick={() => {
-                this.setWordsLimitSettings(10, this.wordsLimitCells.children);
-              }}
-            >
-              10
-            </div>
-            <div
-              className={styles.wordsLimitCell}
-              onClick={() => {
-                this.setWordsLimitSettings(20, this.wordsLimitCells.children);
-              }}
-            >
-              20
-            </div>
-            <div
-              className={styles.wordsLimitCell}
-              onClick={() => {
-                this.setWordsLimitSettings(30, this.wordsLimitCells.children);
-              }}
-            >
-              30
-            </div>
+          <div className={styles.wordsLimitCells}>
+            <WordsLimitCell
+              index={10}
+              setWordsLimitStorage={this.props.setWordsLimitStorage}
+              certainCell={this.state.certainCell}
+              certainCellSetter={this.certainCellSetter}
+            />
+            <WordsLimitCell
+              index={20}
+              setWordsLimitStorage={this.props.setWordsLimitStorage}
+              certainCell={this.state.certainCell}
+              certainCellSetter={this.certainCellSetter}
+            />
+            <WordsLimitCell
+              index={30}
+              setWordsLimitStorage={this.props.setWordsLimitStorage}
+              certainCell={this.state.certainCell}
+              certainCellSetter={this.certainCellSetter}
+            />
           </div>
         </div>
       </div>
-    );
+    ) : null;
   }
 }
 

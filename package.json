@@ -10,7 +10,6 @@
     "react-scripts": "^2.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
     "watch": "node scripts/watch.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

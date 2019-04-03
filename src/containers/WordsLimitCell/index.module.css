@@ -1,0 +1,15 @@
+.wordsLimitCell {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 900;
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.white {
+  background: white;
+  color: #0091d7;
+}

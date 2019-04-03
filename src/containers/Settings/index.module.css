@@ -5,9 +5,14 @@
   width: 300px;
   background: #0091d7;
   transition: all 0.3s ease;
-  opacity: 0;
+  opacity: 1;
   padding: 10px;
   border-radius: 10px;
+  display: block;
+}
+
+.settingsHide {
+  display: none;
 }
 
 .wordsLimitSettings {
