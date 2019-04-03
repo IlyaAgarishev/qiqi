@@ -132,7 +132,6 @@ class Main extends React.Component {
             open={this.state.openDictionary}
             dictionaryBtnClick={this.dictionaryBtnClick}
             dictionary={this.state.dictionary}
-            setDictionaryState={this.setDictionaryState}
             deleteWordFromTest={this.deleteWordFromTest}
             clearDictionary={this.clearDictionary}
           />

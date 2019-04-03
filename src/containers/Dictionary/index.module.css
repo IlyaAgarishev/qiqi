@@ -5,11 +5,18 @@
   top: 600px;
   background: hsl(233, 100%, 77%);
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   z-index: 2;
   overflow: hidden;
   transition: all 0.5s ease;
+}
+
+.transformUp {
+  transform: translate(0, 0px);
+}
+
+.transformDown {
+  transform: translate(0, -600px);
 }
 
 .dictionaryTools {
