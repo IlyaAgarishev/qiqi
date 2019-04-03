@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./index.module.css";
 import CloseBtn from "../../img/cancel.svg";
 import Word from "../Word";
+import PropTypes from "prop-types";
 
 class Dictionary extends React.Component {
   shouldComponentUpdate(props) {
@@ -44,5 +45,14 @@ class Dictionary extends React.Component {
     );
   }
 }
+
+Dictionary.propTypes = {
+  open: PropTypes.bool.isRequired,
+  dictionaryBtnClick: PropTypes.func.isRequired,
+  dictionary: PropTypes.array.isRequired,
+  setDictionaryState: PropTypes.func.isRequired,
+  deleteWordFromTest: PropTypes.func.isRequired,
+  clearDictionary: PropTypes.func.isRequired
+};
 
 export default Dictionary;
