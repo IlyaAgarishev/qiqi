@@ -1,29 +1,15 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
-
-const tryMetryMe = (wordsLimit, dictionaryLength) => {
-  let wordsLeft = wordsLimit - dictionaryLength;
-  if (
-    (wordsLeft >= 5 && wordsLeft <= 14) ||
-    (wordsLeft % 10 >= 5 && wordsLeft % 10 <= 9) ||
-    wordsLeft % 10 === 0
-  ) {
-    return `${wordsLeft} слов`;
-  } else if (wordsLeft >= 2 && wordsLeft <= 4) {
-    return `${wordsLeft} слова`;
-  } else if (wordsLeft === 1 || (wordsLeft % 10 >= 1 && wordsLeft % 10 <= 4)) {
-    return `${wordsLeft} слово`;
-  }
-};
+import { wordEndingGenerator } from "../../ponyFunctions";
 
 const WordsTillTest = props => {
   const { wordsLimit, dictionaryLength } = { ...props };
-  let wordsLeftString = tryMetryMe(wordsLimit, dictionaryLength);
+  let wordsLeft = wordEndingGenerator(wordsLimit, dictionaryLength);
   return (
     <div className={styles.wordsTillTest}>
       Вам осталось набрать
-      <div className={styles.numberOfWords}>{wordsLeftString}</div>
+      <div className={styles.numberOfWords}>{wordsLeft}</div>
       чтобы начать тест
     </div>
   );
