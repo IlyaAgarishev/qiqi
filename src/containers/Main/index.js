@@ -1,7 +1,7 @@
 /* global chrome */
 
 import React from "react";
-import "./index.css";
+import styles from "./index.module.css";
 import settings from "../../img/settings.svg";
 import book from "../../img/book.svg";
 import WordsTillTest from "../../containers/WordsTillTest";
@@ -87,15 +87,16 @@ class Main extends React.Component {
   render() {
     return (
       <div
-        className="main"
+        className={styles.main}
         onClick={event => {
           if (
-            event.target.className === "settings" ||
-            event.target.className === "settings-img" ||
-            event.target.className === "wordsLimit-settings" ||
-            event.target.className === "wordsLimit-settings-title" ||
-            event.target.className === "wordsLimit-cells" ||
-            event.target.className === "wordsLimit-cell"
+            event.target.className.split("_")[1] === "settings" ||
+            event.target.className.split("_")[1] === "settingsImg" ||
+            event.target.className.split("_")[1] === "wordsLimitSettings" ||
+            event.target.className.split("_")[1] ===
+              "wordsLimitSettingsTitle" ||
+            event.target.className.split("_")[1] === "wordsLimitCells" ||
+            event.target.className.split("_")[1] === "wordsLimitCell"
           ) {
             return null;
           } else {
@@ -104,17 +105,17 @@ class Main extends React.Component {
           }
         }}
       >
-        <div className="header">
-          <div className="logo">qiqi</div>
+        <div className={styles.header}>
+          <div className={styles.logo}>qiqi</div>
           <img
             src={settings}
             alt=""
-            className="settings-img"
+            className={styles.settingsImg}
             ref={ref => (this.settingsImg = ref)}
             onClick={this.settingsBtnClick}
           />
         </div>
-        <div className="content">
+        <div className={styles.content}>
           {this.state.dictionary.length >= this.state.wordsLimit ? (
             <Quiz
               wordsToTest={this.state.dictionary}
@@ -140,9 +141,12 @@ class Main extends React.Component {
             setWordsLimitStorage={this.setWordsLimitStorage}
           />
         </div>
-        <div className="footer">
-          <div className="dictionary-button" onClick={this.dictionaryBtnClick}>
-            <img src={book} alt="" className="book" /> Слова для теста
+        <div className={styles.footer}>
+          <div
+            className={styles.dictionaryButton}
+            onClick={this.dictionaryBtnClick}
+          >
+            <img src={book} alt="" className={styles.book} /> Слова для теста
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@
   font-weight: 900;
   color: #0091d7;
 }
-.settings-img {
+.settingsImg {
   width: 25px;
   height: 25px;
   cursor: pointer;
@@ -43,7 +43,7 @@
   align-items: center;
 }
 
-.dictionary-button {
+.dictionaryButton {
   padding: 10px 15px;
   border-radius: 20px;
   font-weight: bold;
@@ -55,7 +55,7 @@
   height: 20px;
 }
 
-.dictionary-button:hover {
+.dictionaryButton:hover {
   transition: all 0.3s ease;
   background: rgb(128, 141, 236);
 }
