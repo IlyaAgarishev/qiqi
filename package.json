@@ -4,10 +4,18 @@
   "author": "Ilya Agarishev",
   "private": true,
   "dependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.0",
+    "enzyme-to-json": "^3.3.5",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-random-quiz": "^0.1.4",
     "react-scripts": "^2.1.8"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "scripts": {
     "watch": "node scripts/watch.js",
