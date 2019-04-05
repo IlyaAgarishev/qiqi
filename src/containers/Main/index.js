@@ -17,17 +17,11 @@ class Main extends React.Component {
       startTest: false,
       openDictionary: false,
       openSettings: false,
-      // wordsLimit: 10,
       dictionary: []
     };
   }
 
   componentWillMount() {
-    // let syntheticDictionary = [];
-    // for (let i = 0; i < 10; i++) {
-    //   syntheticDictionary.push({ word: `Word_${i}`, translation: `Слово_${i}` });
-    // }
-    // this.setState({ dictionary: syntheticDictionary });
     this.setWordsLimitState();
     this.setDictionaryState();
   }

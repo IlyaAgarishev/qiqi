@@ -7897,10 +7897,10 @@ react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-random-quiz@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/react-random-quiz/-/react-random-quiz-0.1.4.tgz#74aed480def285c14bd129a8f2dcd873b072b43a"
-  integrity sha512-sLcwKI6Ci4/lbFS21mK/aceFzXpa4K0Nb7lT/A3Qb5EbQMTtQ61xmdau5SkRbWksxC80Qq/5B8npiXhchvY7LQ==
+react-random-quiz@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-random-quiz/-/react-random-quiz-0.1.5.tgz#c040da5a7e5a52e763ae60bf8081ccc8585b966f"
+  integrity sha512-xG/pLY2hrDyceJsTZi8ufpqIys3Ja3Xr1wOITmbL7FOTngcyL7vVqAKMFkQEYyUUimGL1Qiz1QLNjw5wcJlUig==
 
 react-scripts@^2.1.8:
   version "2.1.8"
