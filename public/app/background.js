@@ -1,7 +1,7 @@
-// chrome.runtime.onInstalled.addListener(function() {
-//   var newURL = "https://github.com/IlyaAgarishev/qiqi";
-//   chrome.tabs.create({ url: newURL });
-// });
+chrome.runtime.onInstalled.addListener(function() {
+  var newURL = "https://qiqi.surge.sh/";
+  chrome.tabs.create({ url: newURL });
+});
 
 // Creating pattern ajax post request
 ajaxPostRequest = (text, url, callback) => {
