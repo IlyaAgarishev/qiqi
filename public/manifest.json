@@ -1,12 +1,16 @@
 {
   "name": "qiqi",
-  "version": "1.0",
+  "version": "1.2",
   "permissions": ["storage", "<all_urls>"],
   "manifest_version": 2,
   "background": {
     "scripts": ["app/background.js"]
   },
-  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "browser_action": {
     "default_popup": "index.html"
   },
@@ -17,5 +21,5 @@
       "js": ["app/content.js"]
     }
   ],
-  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; 'unsafe-inline' object-src 'self'"
 }
