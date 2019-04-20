@@ -4,14 +4,13 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
 import WordsLimitCell from "../WordsLimitCell";
+import { wordsLimitGet } from "../../utils";
 
 const Settings = props => {
   const { open, setWordsLimitStorage } = { ...props };
   const [certainCell, setCertainCell] = useState(null);
 
-  chrome.storage.sync.get(["wordsLimit"], storageData => {
-    setCertainCell(storageData.wordsLimit);
-  });
+  wordsLimitGet(setCertainCell);
 
   return open ? (
     <div className={styles.settings}>

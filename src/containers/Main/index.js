@@ -1,6 +1,6 @@
 /* global chrome */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import settings from "../../img/settings.svg";
 import book from "../../img/book.svg";
@@ -9,141 +9,120 @@ import Dictionary from "../Dictionary";
 import Settings from "../Settings";
 import Quiz from "react-random-quiz";
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
+const Main = () => {
+  const [openDictionary, setOpenDictionary] = useState(false);
+  const [openSettings, setOpenSettings] = useState(false);
+  const [dictionary, setDictionary] = useState([]);
+  const [wordsLimit, setWordsLimit] = useState(10);
 
-    this.state = {
-      startTest: false,
-      openDictionary: false,
-      openSettings: false,
-      dictionary: []
-    };
-  }
-
-  componentWillMount() {
-    this.setWordsLimitState();
-    this.setDictionaryState();
-  }
-
-  setWordsLimitState = () => {
+  const setWordsLimitState = () => {
     chrome.storage.sync.get(["wordsLimit"], storageData => {
-      this.setState({ wordsLimit: storageData.wordsLimit });
+      setWordsLimit(storageData.wordsLimit);
     });
   };
 
-  setWordsLimitStorage = number => {
+  const setWordsLimitStorage = number => {
     chrome.storage.sync.set({ wordsLimit: number }, () => {
-      this.setWordsLimitState();
+      setWordsLimitState();
     });
   };
 
-  setDictionaryState = () => {
+  const setDictionaryState = () => {
     chrome.storage.sync.get(["dictionary"], storageData => {
-      this.setState({
-        dictionary: storageData.dictionary
-      });
+      setDictionary(storageData.dictionary);
     });
   };
 
-  clearDictionary = () => {
+  const clearDictionary = () => {
     chrome.storage.sync.set({ dictionary: [] }, () => {
-      this.setDictionaryState();
+      setDictionaryState();
     });
   };
 
-  setChromeStorage = () => {
-    chrome.storage.sync.set({ dictionary: this.state.dictionary }, function() {
+  const setChromeStorage = () => {
+    chrome.storage.sync.set({ dictionary: dictionary }, function() {
       chrome.storage.sync.get(["dictionary"], function(storageData) {
         console.log(storageData.dictionary);
       });
     });
   };
 
-  dictionaryBtnClick = () => {
-    this.setState({ openDictionary: !this.state.openDictionary });
-    this.setDictionaryState();
+  const dictionaryBtnClick = () => {
+    setOpenDictionary(!openDictionary);
+    setDictionaryState();
   };
 
-  settingsBtnClick = () => {
-    this.setState({ openSettings: !this.state.openSettings });
+  const settingsBtnClick = () => {
+    setOpenSettings(!openSettings);
   };
 
-  deleteWordFromTest = index => {
-    this.setState({ startTest: false });
-    this.state.dictionary.splice(index, 1);
-    this.setChromeStorage();
+  const deleteWordFromTest = index => {
+    dictionary.splice(index, 1);
+    setChromeStorage();
   };
 
-  render() {
-    return (
-      <div
-        className={styles.main}
-        onClick={event => {
-          if (
-            event.target.className.split("_")[0] === "Settings" ||
-            event.target.className.split("_")[0] === "WordsLimitCell" ||
-            event.target.className.split("_")[1] === "settingsImg"
-          ) {
-            return null;
-          } else {
-            this.setState({ openSettings: false });
+  useEffect(() => {
+    setWordsLimitState();
+    setDictionaryState();
+  });
+
+  return (
+    <div
+      className={styles.main}
+      onClick={event => {
+        if (
+          event.target.className.split("_")[0] === "Settings" ||
+          event.target.className.split("_")[0] === "WordsLimitCell" ||
+          event.target.className.split("_")[1] === "settingsImg"
+        ) {
+          return null;
+        } else {
+          setOpenSettings(false);
+        }
+      }}
+    >
+      <div className={styles.header}>
+        <div className={styles.logo}>qiqi</div>
+        <img
+          src={settings}
+          alt=""
+          className={
+            openSettings
+              ? [styles.settingsImg, styles.settingsImgTransformPlus].join(" ")
+              : [styles.settingsImg, styles.settingsImgTransformMinus].join(" ")
           }
-        }}
-      >
-        <div className={styles.header}>
-          <div className={styles.logo}>qiqi</div>
-          <img
-            src={settings}
-            alt=""
-            className={
-              this.state.openSettings
-                ? [styles.settingsImg, styles.settingsImgTransformPlus].join(
-                    " "
-                  )
-                : [styles.settingsImg, styles.settingsImgTransformMinus].join(
-                    " "
-                  )
-            }
-            onClick={this.settingsBtnClick}
+          onClick={settingsBtnClick}
+        />
+      </div>
+      <div className={styles.content}>
+        {dictionary.length >= wordsLimit ? (
+          <Quiz wordsToTest={dictionary} clearDictionary={clearDictionary} />
+        ) : (
+          <WordsTillTest
+            dictionaryLength={dictionary.length}
+            wordsLimit={wordsLimit}
           />
-        </div>
-        <div className={styles.content}>
-          {this.state.dictionary.length >= this.state.wordsLimit ? (
-            <Quiz
-              wordsToTest={this.state.dictionary}
-              clearDictionary={this.clearDictionary}
-            />
-          ) : (
-            <WordsTillTest
-              dictionaryLength={this.state.dictionary.length}
-              wordsLimit={this.state.wordsLimit}
-            />
-          )}
+        )}
 
-          <Dictionary
-            open={this.state.openDictionary}
-            dictionaryBtnClick={this.dictionaryBtnClick}
-            dictionary={this.state.dictionary}
-            deleteWordFromTest={this.deleteWordFromTest}
-            clearDictionary={this.clearDictionary}
-          />
-          <Settings
-            open={this.state.openSettings}
-            setWordsLimitStorage={this.setWordsLimitStorage}
-          />
-        </div>
-        <div className={styles.footer}>
-          <div
-            className={styles.dictionaryButton}
-            onClick={this.dictionaryBtnClick}
-          >
-            <img src={book} alt="" className={styles.book} /> Слова для теста
-          </div>
+        <Dictionary
+          open={openDictionary}
+          dictionaryBtnClick={dictionaryBtnClick}
+          dictionary={dictionary}
+          deleteWordFromTest={deleteWordFromTest}
+          clearDictionary={clearDictionary}
+        />
+        <Settings
+          open={openSettings}
+          setWordsLimitStorage={setWordsLimitStorage}
+        />
+      </div>
+      <div className={styles.footer}>
+        <div className={styles.dictionaryButton} onClick={dictionaryBtnClick}>
+          <img src={book} alt="" className={styles.book} /> Слова для теста
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Main;

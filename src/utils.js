@@ -1,3 +1,5 @@
+/* global chrome */
+
 export const wordEndingGenerator = (wordsLimit, dictionaryLength) => {
   let wordsLeft = wordsLimit - dictionaryLength;
   if (
@@ -11,4 +13,16 @@ export const wordEndingGenerator = (wordsLimit, dictionaryLength) => {
   } else if (wordsLeft === 1 || (wordsLeft % 10 >= 1 && wordsLeft % 10 <= 4)) {
     return `${wordsLeft} слово`;
   }
+};
+
+export const wordsLimitGet = callback => {
+  chrome.storage.sync.get(["wordsLimit"], storageData => {
+    callback(storageData.wordsLimit);
+  });
+};
+
+export const wordsLimitSet = callback => {
+  chrome.storage.sync.get(["wordsLimit"], storageData => {
+    callback(storageData.wordsLimit);
+  });
 };
