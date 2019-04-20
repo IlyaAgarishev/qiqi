@@ -36,6 +36,8 @@ const Dictionary = props => {
             <Word
               originalWord={word.word}
               translatedWord={word.translation}
+              dictionary={dictionary}
+              setDictionary={setDictionary}
               index={index}
             />
           );

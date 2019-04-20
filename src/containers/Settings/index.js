@@ -9,7 +9,7 @@ import { wordsLimitGet } from "../../utils";
 const Settings = props => {
   const { open, setWordsLimit } = { ...props };
   const [certainCell, setCertainCell] = useState(10);
-
+  const numbersArray = [10, 20, 30];
   return open ? (
     <div className={styles.settings}>
       <div className={styles.wordsLimitSettings}>
@@ -17,24 +17,16 @@ const Settings = props => {
           Количество слов в тесте :
         </div>
         <div className={styles.wordsLimitCells}>
-          <WordsLimitCell
-            index={10}
-            setWordsLimit={setWordsLimit}
-            certainCell={certainCell}
-            setCertainCell={setCertainCell}
-          />
-          <WordsLimitCell
-            index={20}
-            setWordsLimit={setWordsLimit}
-            certainCell={certainCell}
-            setCertainCell={setCertainCell}
-          />
-          <WordsLimitCell
-            index={30}
-            setWordsLimit={setWordsLimit}
-            certainCell={certainCell}
-            setCertainCell={setCertainCell}
-          />
+          {numbersArray.map(number => {
+            return (
+              <WordsLimitCell
+                index={number}
+                setWordsLimit={setWordsLimit}
+                certainCell={certainCell}
+                setCertainCell={setCertainCell}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 /* global chrome */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./index.module.css";
 import settings from "../../img/settings.svg";
 import book from "../../img/book.svg";
