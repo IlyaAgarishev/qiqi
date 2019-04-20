@@ -17,13 +17,14 @@ const Settings = props => {
           Количество слов в тесте :
         </div>
         <div className={styles.wordsLimitCells}>
-          {numbersArray.map(number => {
+          {numbersArray.map((number, index) => {
             return (
               <WordsLimitCell
                 index={number}
                 setWordsLimit={setWordsLimit}
                 certainCell={certainCell}
                 setCertainCell={setCertainCell}
+                key={index}
               />
             );
           })}

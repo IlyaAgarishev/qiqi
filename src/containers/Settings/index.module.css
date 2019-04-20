@@ -1,7 +1,7 @@
 .settings {
-  position: relative;
-  top: -170px;
-  left: 80px;
+  position: absolute;
+  top: 50px;
+  right: 30px;
   width: 300px;
   background: #0091d7;
   transition: all 0.3s ease;

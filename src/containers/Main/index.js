@@ -11,7 +11,7 @@ import Quiz from "react-random-quiz";
 
 const Main = () => {
   const [openDictionary, setOpenDictionary] = useState(false);
-  const [openSettings, setOpenSettings] = useState(false);
+  const [openSettings, setOpenSettings] = useState(true);
   const [dictionary, setDictionary] = useState([
     { translation: "корова", word: "cow" },
     { translation: "кот", word: "cat" },
@@ -25,7 +25,6 @@ const Main = () => {
     { translation: "как", word: "how" }
   ]);
   const [wordsLimit, setWordsLimit] = useState(10);
-
   return (
     <div
       className={styles.main}

@@ -39,6 +39,7 @@ const Dictionary = props => {
               dictionary={dictionary}
               setDictionary={setDictionary}
               index={index}
+              key={index}
             />
           );
         })}
@@ -51,7 +52,6 @@ Dictionary.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpenDictionary: PropTypes.func.isRequired,
   dictionary: PropTypes.array.isRequired,
-  deleteWordFromTest: PropTypes.func.isRequired,
   setDictionary: PropTypes.func.isRequired
 };
 

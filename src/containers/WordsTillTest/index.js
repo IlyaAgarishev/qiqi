@@ -5,11 +5,12 @@ import { wordEndingGenerator } from "../../utils";
 
 const WordsTillTest = props => {
   const { wordsLimit, dictionaryLength } = { ...props };
-  let wordsLeft = wordEndingGenerator(wordsLimit, dictionaryLength);
   return (
     <div className={styles.wordsTillTest}>
       Вам осталось набрать
-      <div className={styles.numberOfWords}>{wordsLeft}</div>
+      <div className={styles.numberOfWords}>
+        {wordEndingGenerator(wordsLimit, dictionaryLength)}
+      </div>
       чтобы начать тест
     </div>
   );
