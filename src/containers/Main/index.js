@@ -12,53 +12,30 @@ import Quiz from "react-random-quiz";
 const Main = () => {
   const [openDictionary, setOpenDictionary] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
-  const [dictionary, setDictionary] = useState([]);
+  const [dictionary, setDictionary] = useState([
+    { translation: "корова", word: "cow" },
+    { translation: "кот", word: "cat" },
+    { translation: "пес", word: "dog" },
+    { translation: "крот", word: "krot" },
+    { translation: "вот", word: "vot" },
+    { translation: "вов", word: "wow" },
+    { translation: "лол", word: "lol" },
+    { translation: "сейчас", word: "now" },
+    { translation: "лох", word: "looser" },
+    { translation: "как", word: "how" }
+  ]);
   const [wordsLimit, setWordsLimit] = useState(10);
 
-  const setWordsLimitState = () => {
-    chrome.storage.sync.get(["wordsLimit"], storageData => {
-      setWordsLimit(storageData.wordsLimit);
-    });
-  };
-
-  const setWordsLimitStorage = number => {
-    chrome.storage.sync.set({ wordsLimit: number }, () => {
-      setWordsLimitState();
-    });
-  };
-
-  const setDictionaryState = () => {
-    chrome.storage.sync.get(["dictionary"], storageData => {
-      setDictionary(storageData.dictionary);
-    });
-  };
-
   const clearDictionary = () => {
-    chrome.storage.sync.set({ dictionary: [] }, () => {
-      setDictionaryState();
-    });
-  };
-
-  const setChromeStorage = () => {
-    chrome.storage.sync.set({ dictionary: dictionary }, function() {
-      chrome.storage.sync.get(["dictionary"], function(storageData) {
-        console.log(storageData.dictionary);
-      });
-    });
+    setDictionary([]);
   };
 
   const dictionaryBtnClick = () => {
     setOpenDictionary(!openDictionary);
-    setDictionaryState();
   };
 
   const settingsBtnClick = () => {
     setOpenSettings(!openSettings);
-  };
-
-  const deleteWordFromTest = index => {
-    dictionary.splice(index, 1);
-    setChromeStorage();
   };
 
   return (
@@ -103,7 +80,6 @@ const Main = () => {
           open={openDictionary}
           dictionaryBtnClick={dictionaryBtnClick}
           dictionary={dictionary}
-          deleteWordFromTest={deleteWordFromTest}
           clearDictionary={clearDictionary}
         />
         <Settings open={openSettings} setWordsLimit={setWordsLimit} />

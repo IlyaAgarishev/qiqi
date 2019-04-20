@@ -26,3 +26,11 @@ export const wordsLimitSet = callback => {
     callback(storageData.wordsLimit);
   });
 };
+
+// chrome.storage.sync.set({ wordsLimit: number }, () => {
+//   setWordsLimitState();
+// });
+
+// chrome.storage.sync.get(["dictionary"], storageData => {
+//   setDictionary(storageData.dictionary);
+// });

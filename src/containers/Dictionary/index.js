@@ -5,13 +5,9 @@ import Word from "../Word";
 import PropTypes from "prop-types";
 
 const Dictionary = props => {
-  const {
-    open,
-    dictionaryBtnClick,
-    dictionary,
-    deleteWordFromTest,
-    clearDictionary
-  } = { ...props };
+  const { open, dictionaryBtnClick, dictionary, clearDictionary } = {
+    ...props
+  };
   return (
     <div
       className={
@@ -35,7 +31,6 @@ const Dictionary = props => {
               originalWord={word.word}
               translatedWord={word.translation}
               index={index}
-              deleteWordFromTest={deleteWordFromTest}
             />
           );
         })}
