@@ -1,61 +1,48 @@
 /* global chrome */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
 import WordsLimitCell from "../WordsLimitCell";
 
-class Settings extends React.Component {
-  constructor(props) {
-    super(props);
+const Settings = props => {
+  const { open, setWordsLimitStorage } = { ...props };
+  const [certainCell, setCertainCell] = useState(null);
 
-    this.state = {
-      certainCell: null
-    };
-  }
+  chrome.storage.sync.get(["wordsLimit"], storageData => {
+    setCertainCell(storageData.wordsLimit);
+  });
 
-  componentWillMount() {
-    chrome.storage.sync.get(["wordsLimit"], storageData => {
-      this.certainCellSetter(storageData.wordsLimit);
-    });
-  }
-
-  certainCellSetter = index => {
-    this.setState({ certainCell: index });
-  };
-
-  render() {
-    return this.props.open ? (
-      <div className={styles.settings}>
-        <div className={styles.wordsLimitSettings}>
-          <div className={styles.wordsLimitSettingsTitle}>
-            Количество слов в тесте :
-          </div>
-          <div className={styles.wordsLimitCells}>
-            <WordsLimitCell
-              index={10}
-              setWordsLimitStorage={this.props.setWordsLimitStorage}
-              certainCell={this.state.certainCell}
-              certainCellSetter={this.certainCellSetter}
-            />
-            <WordsLimitCell
-              index={20}
-              setWordsLimitStorage={this.props.setWordsLimitStorage}
-              certainCell={this.state.certainCell}
-              certainCellSetter={this.certainCellSetter}
-            />
-            <WordsLimitCell
-              index={30}
-              setWordsLimitStorage={this.props.setWordsLimitStorage}
-              certainCell={this.state.certainCell}
-              certainCellSetter={this.certainCellSetter}
-            />
-          </div>
+  return open ? (
+    <div className={styles.settings}>
+      <div className={styles.wordsLimitSettings}>
+        <div className={styles.wordsLimitSettingsTitle}>
+          Количество слов в тесте :
+        </div>
+        <div className={styles.wordsLimitCells}>
+          <WordsLimitCell
+            index={10}
+            setWordsLimitStorage={setWordsLimitStorage}
+            certainCell={certainCell}
+            setCertainCell={setCertainCell}
+          />
+          <WordsLimitCell
+            index={20}
+            setWordsLimitStorage={setWordsLimitStorage}
+            certainCell={certainCell}
+            setCertainCell={setCertainCell}
+          />
+          <WordsLimitCell
+            index={30}
+            setWordsLimitStorage={setWordsLimitStorage}
+            certainCell={certainCell}
+            setCertainCell={setCertainCell}
+          />
         </div>
       </div>
-    ) : null;
-  }
-}
+    </div>
+  ) : null;
+};
 
 Settings.propTypes = {
   open: PropTypes.bool.isRequired,

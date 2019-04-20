@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
-import { wordEndingGenerator } from "../../ponyFunctions";
+import { wordEndingGenerator } from "../../utils";
 
 const WordsTillTest = props => {
   const { wordsLimit, dictionaryLength } = { ...props };
@@ -16,7 +16,7 @@ const WordsTillTest = props => {
 };
 
 WordsTillTest.propTypes = {
-  wordsLimit: PropTypes.number.isRequired,
+  // wordsLimit: PropTypes.number.isRequired,
   dictionaryLength: PropTypes.number.isRequired
 };
 
