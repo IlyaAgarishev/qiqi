@@ -7,10 +7,8 @@ import WordsLimitCell from "../WordsLimitCell";
 import { wordsLimitGet } from "../../utils";
 
 const Settings = props => {
-  const { open, setWordsLimitStorage } = { ...props };
-  const [certainCell, setCertainCell] = useState(null);
-
-  wordsLimitGet(setCertainCell);
+  const { open, setWordsLimit } = { ...props };
+  const [certainCell, setCertainCell] = useState(10);
 
   return open ? (
     <div className={styles.settings}>
@@ -21,19 +19,19 @@ const Settings = props => {
         <div className={styles.wordsLimitCells}>
           <WordsLimitCell
             index={10}
-            setWordsLimitStorage={setWordsLimitStorage}
+            setWordsLimit={setWordsLimit}
             certainCell={certainCell}
             setCertainCell={setCertainCell}
           />
           <WordsLimitCell
             index={20}
-            setWordsLimitStorage={setWordsLimitStorage}
+            setWordsLimit={setWordsLimit}
             certainCell={certainCell}
             setCertainCell={setCertainCell}
           />
           <WordsLimitCell
             index={30}
-            setWordsLimitStorage={setWordsLimitStorage}
+            setWordsLimit={setWordsLimit}
             certainCell={certainCell}
             setCertainCell={setCertainCell}
           />
@@ -45,7 +43,7 @@ const Settings = props => {
 
 Settings.propTypes = {
   open: PropTypes.bool.isRequired,
-  setWordsLimitStorage: PropTypes.func.isRequired
+  setWordsLimit: PropTypes.func.isRequired
 };
 
 export default Settings;

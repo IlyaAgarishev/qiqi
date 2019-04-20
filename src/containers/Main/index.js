@@ -61,11 +61,6 @@ const Main = () => {
     setChromeStorage();
   };
 
-  useEffect(() => {
-    setWordsLimitState();
-    setDictionaryState();
-  });
-
   return (
     <div
       className={styles.main}
@@ -111,10 +106,7 @@ const Main = () => {
           deleteWordFromTest={deleteWordFromTest}
           clearDictionary={clearDictionary}
         />
-        <Settings
-          open={openSettings}
-          setWordsLimitStorage={setWordsLimitStorage}
-        />
+        <Settings open={openSettings} setWordsLimit={setWordsLimit} />
       </div>
       <div className={styles.footer}>
         <div className={styles.dictionaryButton} onClick={dictionaryBtnClick}>
