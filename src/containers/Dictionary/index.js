@@ -5,7 +5,7 @@ import Word from "../Word";
 import PropTypes from "prop-types";
 
 const Dictionary = props => {
-  const { open, dictionaryBtnClick, dictionary, clearDictionary } = {
+  const { open, setOpenDictionary, dictionary, setDictionary } = {
     ...props
   };
   return (
@@ -17,10 +17,16 @@ const Dictionary = props => {
       }
     >
       <div className={styles.dictionaryTools}>
-        <div className={styles.closeBtn} onClick={dictionaryBtnClick}>
+        <div
+          className={styles.closeBtn}
+          onClick={() => setOpenDictionary(!open)}
+        >
           <img src={CloseBtn} alt="" className={styles.closeBtnImg} />
         </div>
-        <div className={styles.clearDictionary} onClick={clearDictionary}>
+        <div
+          className={styles.clearDictionary}
+          onClick={() => setDictionary([])}
+        >
           Очистить
         </div>
       </div>
@@ -41,10 +47,10 @@ const Dictionary = props => {
 
 Dictionary.propTypes = {
   open: PropTypes.bool.isRequired,
-  dictionaryBtnClick: PropTypes.func.isRequired,
+  setOpenDictionary: PropTypes.func.isRequired,
   dictionary: PropTypes.array.isRequired,
   deleteWordFromTest: PropTypes.func.isRequired,
-  clearDictionary: PropTypes.func.isRequired
+  setDictionary: PropTypes.func.isRequired
 };
 
 export default Dictionary;

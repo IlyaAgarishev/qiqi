@@ -26,18 +26,6 @@ const Main = () => {
   ]);
   const [wordsLimit, setWordsLimit] = useState(10);
 
-  const clearDictionary = () => {
-    setDictionary([]);
-  };
-
-  const dictionaryBtnClick = () => {
-    setOpenDictionary(!openDictionary);
-  };
-
-  const settingsBtnClick = () => {
-    setOpenSettings(!openSettings);
-  };
-
   return (
     <div
       className={styles.main}
@@ -63,12 +51,15 @@ const Main = () => {
               ? [styles.settingsImg, styles.settingsImgTransformPlus].join(" ")
               : [styles.settingsImg, styles.settingsImgTransformMinus].join(" ")
           }
-          onClick={settingsBtnClick}
+          onClick={() => setOpenSettings(!openSettings)}
         />
       </div>
       <div className={styles.content}>
         {dictionary.length >= wordsLimit ? (
-          <Quiz wordsToTest={dictionary} clearDictionary={clearDictionary} />
+          <Quiz
+            wordsToTest={dictionary}
+            clearDictionary={() => setDictionary([])}
+          />
         ) : (
           <WordsTillTest
             dictionaryLength={dictionary.length}
@@ -78,14 +69,17 @@ const Main = () => {
 
         <Dictionary
           open={openDictionary}
-          dictionaryBtnClick={dictionaryBtnClick}
+          setOpenDictionary={setOpenDictionary}
           dictionary={dictionary}
-          clearDictionary={clearDictionary}
+          setDictionary={setDictionary}
         />
         <Settings open={openSettings} setWordsLimit={setWordsLimit} />
       </div>
       <div className={styles.footer}>
-        <div className={styles.dictionaryButton} onClick={dictionaryBtnClick}>
+        <div
+          className={styles.dictionaryButton}
+          onClick={() => setOpenDictionary(!openDictionary)}
+        >
           <img src={book} alt="" className={styles.book} /> Слова для теста
         </div>
       </div>
