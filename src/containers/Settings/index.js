@@ -7,9 +7,18 @@ import WordsLimitCell from "../WordsLimitCell";
 import { wordsLimitGet } from "../../utils";
 
 const Settings = props => {
-  const { open, setWordsLimit } = { ...props };
+  const { open, setWordsLimit, wordsLimit } = { ...props };
   const [certainCell, setCertainCell] = useState(10);
   const numbersArray = [10, 20, 30];
+
+  useEffect(() => {
+    wordsLimitGet(setWordsLimit);
+  }, []);
+
+  useEffect(() => {
+    setCertainCell(wordsLimit);
+  }, [wordsLimit]);
+
   return open ? (
     <div className={styles.settings}>
       <div className={styles.wordsLimitSettings}>

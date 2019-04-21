@@ -21,16 +21,22 @@ export const wordsLimitGet = callback => {
   });
 };
 
-export const wordsLimitSet = callback => {
-  chrome.storage.sync.get(["wordsLimit"], storageData => {
-    callback(storageData.wordsLimit);
-  });
+export const wordsLimitSet = number => {
+  chrome.storage.sync.set({ wordsLimit: number });
 };
+
+// export const dictionaryGet = callback => {
+//   chrome.storage.sync.get(["dictionary"], storageData => {
+//     callback(storageData.dictionary);
+//   });
+// };
+
+// export const wordsLimitSet = callback => {
+//   chrome.storage.sync.get(["wordsLimit"], storageData => {
+//     callback(storageData.wordsLimit);
+//   });
+// };
 
 // chrome.storage.sync.set({ wordsLimit: number }, () => {
 //   setWordsLimitState();
-// });
-
-// chrome.storage.sync.get(["dictionary"], storageData => {
-//   setDictionary(storageData.dictionary);
 // });

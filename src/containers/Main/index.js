@@ -1,6 +1,6 @@
 /* global chrome */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
 import settings from "../../img/settings.svg";
 import book from "../../img/book.svg";
@@ -8,10 +8,12 @@ import WordsTillTest from "../../containers/WordsTillTest";
 import Dictionary from "../Dictionary";
 import Settings from "../Settings";
 import Quiz from "react-random-quiz";
+import { wordsLimitGet, wordsLimitSet } from "../../utils";
+import { dictionaryGet } from "../../utils";
 
 const Main = () => {
   const [openDictionary, setOpenDictionary] = useState(false);
-  const [openSettings, setOpenSettings] = useState(true);
+  const [openSettings, setOpenSettings] = useState(false);
   const [dictionary, setDictionary] = useState([
     { translation: "корова", word: "cow" },
     { translation: "кот", word: "cat" },
@@ -25,6 +27,7 @@ const Main = () => {
     { translation: "как", word: "how" }
   ]);
   const [wordsLimit, setWordsLimit] = useState(10);
+
   return (
     <div
       className={styles.main}
@@ -72,7 +75,11 @@ const Main = () => {
           dictionary={dictionary}
           setDictionary={setDictionary}
         />
-        <Settings open={openSettings} setWordsLimit={setWordsLimit} />
+        <Settings
+          open={openSettings}
+          setWordsLimit={setWordsLimit}
+          wordsLimit={wordsLimit}
+        />
       </div>
       <div className={styles.footer}>
         <div
