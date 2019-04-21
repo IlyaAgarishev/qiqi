@@ -1,6 +1,6 @@
 /* global chrome */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./index.module.css";
 import settings from "../../img/settings.svg";
 import book from "../../img/book.svg";
@@ -8,25 +8,39 @@ import WordsTillTest from "../../containers/WordsTillTest";
 import Dictionary from "../Dictionary";
 import Settings from "../Settings";
 import Quiz from "react-random-quiz";
-import { wordsLimitGet, wordsLimitSet } from "../../utils";
-import { dictionaryGet } from "../../utils";
+import { wordsLimitGet, dictionaryGet } from "../../utils";
 
 const Main = () => {
   const [openDictionary, setOpenDictionary] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
-  const [dictionary, setDictionary] = useState([
-    { translation: "корова", word: "cow" },
-    { translation: "кот", word: "cat" },
-    { translation: "пес", word: "dog" },
-    { translation: "крот", word: "krot" },
-    { translation: "вот", word: "vot" },
-    { translation: "вов", word: "wow" },
-    { translation: "лол", word: "lol" },
-    { translation: "сейчас", word: "now" },
-    { translation: "лох", word: "looser" },
-    { translation: "как", word: "how" }
-  ]);
+  const [dictionary, setDictionary] = useState([]);
   const [wordsLimit, setWordsLimit] = useState(10);
+
+  useMemo(() => {
+    dictionaryGet(setDictionary);
+  }, []);
+
+  useEffect(() => {
+    wordsLimitGet(setWordsLimit);
+  }, []);
+
+  const showQuiz = () => {
+    if (dictionary.length >= wordsLimit) {
+      return (
+        <Quiz
+          wordsToTest={dictionary}
+          clearDictionary={() => setDictionary([])}
+        />
+      );
+    } else {
+      return (
+        <WordsTillTest
+          dictionaryLength={dictionary.length}
+          wordsLimit={wordsLimit}
+        />
+      );
+    }
+  };
 
   return (
     <div
@@ -57,29 +71,16 @@ const Main = () => {
         />
       </div>
       <div className={styles.content}>
-        {dictionary.length >= wordsLimit ? (
-          <Quiz
-            wordsToTest={dictionary}
-            clearDictionary={() => setDictionary([])}
-          />
-        ) : (
-          <WordsTillTest
-            dictionaryLength={dictionary.length}
-            wordsLimit={wordsLimit}
-          />
-        )}
-
+        {showQuiz()}
         <Dictionary
           open={openDictionary}
           setOpenDictionary={setOpenDictionary}
           dictionary={dictionary}
           setDictionary={setDictionary}
         />
-        <Settings
-          open={openSettings}
-          setWordsLimit={setWordsLimit}
-          wordsLimit={wordsLimit}
-        />
+        {openSettings ? (
+          <Settings setWordsLimit={setWordsLimit} wordsLimit={wordsLimit} />
+        ) : null}
       </div>
       <div className={styles.footer}>
         <div
