@@ -1,13 +1,12 @@
 /* global chrome */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
 import WordsLimitCell from "../WordsLimitCell";
 
 const Settings = props => {
   const { setWordsLimit, wordsLimit } = { ...props };
-  const [certainCell, setCertainCell] = useState(wordsLimit);
   const numbersArray = [10, 20, 30];
 
   return (
@@ -21,9 +20,8 @@ const Settings = props => {
             return (
               <WordsLimitCell
                 index={number}
+                wordsLimit={wordsLimit}
                 setWordsLimit={setWordsLimit}
-                certainCell={certainCell}
-                setCertainCell={setCertainCell}
                 key={index}
               />
             );
@@ -35,7 +33,8 @@ const Settings = props => {
 };
 
 Settings.propTypes = {
-  setWordsLimit: PropTypes.func.isRequired
+  setWordsLimit: PropTypes.func.isRequired,
+  wordsLimit: PropTypes.number.isRequired
 };
 
 export default Settings;

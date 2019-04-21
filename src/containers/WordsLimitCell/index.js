@@ -3,19 +3,18 @@ import styles from "./index.module.css";
 import PropTypes from "prop-types";
 
 const WordsLimitCell = props => {
-  const { index, setWordsLimit, certainCell, setCertainCell } = {
+  const { index, setWordsLimit, wordsLimit } = {
     ...props
   };
   return (
     <div
       className={
-        certainCell === index
+        index === wordsLimit
           ? [styles.wordsLimitCell, styles.white].join(" ")
           : styles.wordsLimitCell
       }
       onClick={() => {
         setWordsLimit(index);
-        setCertainCell(index);
       }}
     >
       {index}
@@ -26,8 +25,7 @@ const WordsLimitCell = props => {
 WordsLimitCell.propTypes = {
   index: PropTypes.number.isRequired,
   setWordsLimit: PropTypes.func.isRequired,
-  certainCell: PropTypes.number.isRequired,
-  setCertainCell: PropTypes.func.isRequired
+  wordsLimit: PropTypes.number.isRequired
 };
 
 export default WordsLimitCell;

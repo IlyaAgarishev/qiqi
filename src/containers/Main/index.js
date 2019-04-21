@@ -37,24 +37,6 @@ const Main = () => {
     wordsLimitSet(wordsLimit);
   }, [wordsLimit]);
 
-  const showQuiz = () => {
-    if (dictionary.length >= wordsLimit) {
-      return (
-        <Quiz
-          wordsToTest={dictionary}
-          clearDictionary={() => setDictionary([])}
-        />
-      );
-    } else {
-      return (
-        <WordsTillTest
-          dictionaryLength={dictionary.length}
-          wordsLimit={wordsLimit}
-        />
-      );
-    }
-  };
-
   return (
     <div
       className={styles.main}
@@ -84,7 +66,17 @@ const Main = () => {
         />
       </div>
       <div className={styles.content}>
-        {showQuiz()}
+        {dictionary.length >= wordsLimit ? (
+          <Quiz
+            wordsToTest={dictionary}
+            clearDictionary={() => setDictionary([])}
+          />
+        ) : (
+          <WordsTillTest
+            dictionaryLength={dictionary.length}
+            wordsLimit={wordsLimit}
+          />
+        )}
         <Dictionary
           open={openDictionary}
           setOpenDictionary={setOpenDictionary}
