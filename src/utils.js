@@ -31,6 +31,10 @@ export const dictionaryGet = callback => {
   });
 };
 
+export const dictionarySet = array => {
+  chrome.storage.sync.set({ dictionary: array });
+};
+
 // export const wordsLimitSet = callback => {
 //   chrome.storage.sync.get(["wordsLimit"], storageData => {
 //     callback(storageData.wordsLimit);

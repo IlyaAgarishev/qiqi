@@ -8,7 +8,12 @@ import WordsTillTest from "../../containers/WordsTillTest";
 import Dictionary from "../Dictionary";
 import Settings from "../Settings";
 import Quiz from "react-random-quiz";
-import { wordsLimitGet, dictionaryGet } from "../../utils";
+import {
+  wordsLimitGet,
+  dictionaryGet,
+  dictionarySet,
+  wordsLimitSet
+} from "../../utils";
 
 const Main = () => {
   const [openDictionary, setOpenDictionary] = useState(false);
@@ -23,6 +28,14 @@ const Main = () => {
   useEffect(() => {
     wordsLimitGet(setWordsLimit);
   }, []);
+
+  useEffect(() => {
+    dictionarySet(dictionary);
+  }, [dictionary]);
+
+  useEffect(() => {
+    wordsLimitSet(wordsLimit);
+  }, [wordsLimit]);
 
   const showQuiz = () => {
     if (dictionary.length >= wordsLimit) {

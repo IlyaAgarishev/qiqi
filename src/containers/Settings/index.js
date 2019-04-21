@@ -9,6 +9,7 @@ const Settings = props => {
   const { setWordsLimit, wordsLimit } = { ...props };
   const [certainCell, setCertainCell] = useState(wordsLimit);
   const numbersArray = [10, 20, 30];
+
   return (
     <div className={styles.settings}>
       <div className={styles.wordsLimitSettings}>

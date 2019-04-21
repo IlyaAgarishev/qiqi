@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
 import PropTypes from "prop-types";
-import { wordsLimitSet } from "../../utils";
 
 const WordsLimitCell = props => {
   const { index, setWordsLimit, certainCell, setCertainCell } = {
@@ -17,7 +16,6 @@ const WordsLimitCell = props => {
       onClick={() => {
         setWordsLimit(index);
         setCertainCell(index);
-        wordsLimitSet(index);
       }}
     >
       {index}
