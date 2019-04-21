@@ -38,20 +38,7 @@ const Main = () => {
   }, [wordsLimit]);
 
   return (
-    <div
-      className={styles.main}
-      onClick={event => {
-        if (
-          event.target.className.split("_")[0] === "Settings" ||
-          event.target.className.split("_")[0] === "WordsLimitCell" ||
-          event.target.className.split("_")[1] === "settingsImg"
-        ) {
-          return null;
-        } else {
-          setOpenSettings(false);
-        }
-      }}
-    >
+    <div className={styles.main}>
       <div className={styles.header}>
         <div className={styles.logo}>qiqi</div>
         <img
@@ -84,7 +71,11 @@ const Main = () => {
           setDictionary={setDictionary}
         />
         {openSettings ? (
-          <Settings setWordsLimit={setWordsLimit} wordsLimit={wordsLimit} />
+          <Settings
+            setWordsLimit={setWordsLimit}
+            wordsLimit={wordsLimit}
+            setOpenSettings={setOpenSettings}
+          />
         ) : null}
       </div>
       <div className={styles.footer}>
