@@ -10,7 +10,8 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-random-quiz": "^0.1.5",
-    "react-scripts": "^2.1.8"
+    "react-scripts": "^2.1.8",
+    "eslint-plugin-react-hooks": "^1.6.0"
   },
   "jest": {
     "snapshotSerializers": [
