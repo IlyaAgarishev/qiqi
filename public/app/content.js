@@ -18,7 +18,6 @@ chrome.storage.sync.get(["wordsLimit"], data => {
 
 document.body.onmouseup = event => {
   chrome.storage.sync.get(["dictionary"], storageData => {
-    console.log(storageData);
     let onlyLatingLettersRegExp = /[a-zA-Z]+/g;
     let selectedWord = window
       .getSelection()

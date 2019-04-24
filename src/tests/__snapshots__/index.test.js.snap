@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshots 1`] = `
+<div
+  className="wordsTillTest"
+>
+  Вам осталось набрать
+  <div
+    className="numberOfWords"
+  >
+    20 слов
+  </div>
+  чтобы начать тест
+</div>
+`;
+
+exports[`Snapshots 2`] = `
+<div
+  className="wordsLimitCell"
+  onClick={[Function]}
+>
+  10
+</div>
+`;
+
+exports[`Snapshots 3`] = `
+<div>
+  <div
+    className="closeSettings"
+    onClick={[Function]}
+  />
+  <div
+    className="settings"
+  >
+    <div
+      className="wordsLimitSettings"
+    >
+      <div
+        className="wordsLimitSettingsTitle"
+      >
+        Количество слов в тесте :
+      </div>
+      <div
+        className="wordsLimitCells"
+      >
+        <WordsLimitCell
+          index={10}
+          key="0"
+          setWordsLimit={[MockFunction]}
+          wordsLimit={30}
+        />
+        <WordsLimitCell
+          index={20}
+          key="1"
+          setWordsLimit={[MockFunction]}
+          wordsLimit={30}
+        />
+        <WordsLimitCell
+          index={30}
+          key="2"
+          setWordsLimit={[MockFunction]}
+          wordsLimit={30}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Snapshots 4`] = `
+<div
+  className="word"
+  onClick={[Function]}
+>
+  <strong>
+    wow
+  </strong>
+  <div>
+    воу
+  </div>
+</div>
+`;
+
+exports[`Snapshots 5`] = `
+<div
+  className="dictionary transformUp"
+>
+  <div
+    className="dictionaryTools"
+  >
+    <div
+      className="closeBtn"
+      onClick={[Function]}
+    >
+      <img
+        alt=""
+        className="closeBtnImg"
+        src="cancel.svg"
+      />
+    </div>
+    <div
+      className="clearDictionary"
+      onClick={[Function]}
+    >
+      Очистить
+    </div>
+  </div>
+  <div
+    className="words"
+  >
+    <Word
+      dictionary={
+        Array [
+          Object {
+            "translation": "кот",
+            "word": "cat",
+          },
+          Object {
+            "translation": "пес",
+            "word": "dog",
+          },
+          Object {
+            "translation": "лев",
+            "word": "lion",
+          },
+        ]
+      }
+      index={0}
+      key="0"
+      originalWord="cat"
+      setDictionary={[MockFunction]}
+      translatedWord="кот"
+    />
+    <Word
+      dictionary={
+        Array [
+          Object {
+            "translation": "кот",
+            "word": "cat",
+          },
+          Object {
+            "translation": "пес",
+            "word": "dog",
+          },
+          Object {
+            "translation": "лев",
+            "word": "lion",
+          },
+        ]
+      }
+      index={1}
+      key="1"
+      originalWord="dog"
+      setDictionary={[MockFunction]}
+      translatedWord="пес"
+    />
+    <Word
+      dictionary={
+        Array [
+          Object {
+            "translation": "кот",
+            "word": "cat",
+          },
+          Object {
+            "translation": "пес",
+            "word": "dog",
+          },
+          Object {
+            "translation": "лев",
+            "word": "lion",
+          },
+        ]
+      }
+      index={2}
+      key="2"
+      originalWord="lion"
+      setDictionary={[MockFunction]}
+      translatedWord="лев"
+    />
+  </div>
+</div>
+`;

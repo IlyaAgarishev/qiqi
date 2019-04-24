@@ -142,3 +142,15 @@ test("Dictionary renders right string", () => {
     ).toBe(el.word + el.translation);
   });
 });
+
+// Snapshots
+
+test("Snapshots", () => {
+  expect(shallow(<WordsTillTest {...props.WordsTillTest} />)).toMatchSnapshot();
+  expect(
+    shallow(<WordsLimitCell {...props.WordsLimitCell} />)
+  ).toMatchSnapshot();
+  expect(shallow(<Settings {...props.Settings} />)).toMatchSnapshot();
+  expect(shallow(<Word {...props.Word} />)).toMatchSnapshot();
+  expect(shallow(<Dictionary {...props.Dictionary} />)).toMatchSnapshot();
+});
