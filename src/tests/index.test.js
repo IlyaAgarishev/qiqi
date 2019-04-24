@@ -4,6 +4,7 @@ import { wordEndingGenerator } from "../utils";
 import WordsTillTest from "../containers/WordsTillTest";
 import WordsLimitCell from "../containers/WordsLimitCell";
 import Settings from "../containers/Settings";
+import Word from "../containers/Word";
 
 // functions-tools for testing
 const digitsArratGenerator = conditions => {
@@ -72,7 +73,7 @@ test("WordsLimitCell renders right string", () => {
   const component = mount(
     <WordsLimitCell index={index} setWordsLimit={jest.fn()} wordsLimit={30} />
   );
-  expect(component.find(".wordsLimitCell").text()).toBe(`${idnex}`);
+  expect(component.find(".wordsLimitCell").text()).toBe(`${index}`);
 });
 
 test("Settings renders right string", () => {
@@ -80,7 +81,7 @@ test("Settings renders right string", () => {
     <Settings
       setWordsLimit={jest.fn()}
       wordsLimit={30}
-      setOpenSettings={jest.fn}
+      setOpenSettings={jest.fn()}
     />
   );
   const numbersArray = [10, 20, 30];
@@ -92,4 +93,17 @@ test("Settings renders right string", () => {
         .text()
     ).toBe(`${number}`);
   });
+});
+
+test("Word renders right string", () => {
+  const props = {
+    index: 1,
+    originalWord: "wow",
+    translatedWord: "воу",
+    dictionary: [],
+    setDictionary: jest.fn()
+  };
+  const component = mount(<Word {...props} />);
+  expect(component.find(".originalWord").text()).toBe(props.originalWord);
+  expect(component.find(".translatedWord").text()).toBe(props.translatedWord);
 });
