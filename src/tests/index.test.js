@@ -1,6 +1,7 @@
 import React from "react";
 import { mount, render, shallow } from "enzyme";
 import { wordEndingGenerator } from "../utils";
+import WordsTillTest from "../containers/WordsTillTest";
 
 // functions-tools for testing
 const digitsArratGenerator = conditions => {
@@ -47,4 +48,19 @@ test("wordEndingGenerator returns word 'slovo", () => {
   digitsArratGenerator(conditionsForWord_slovo).forEach(el => {
     expect(wordEndingGenerator(el)).toBe(`${el} слово`);
   });
+});
+
+// Components testing
+
+test("WordsTillTest renders right string", () => {
+  const wordsLimit = 30;
+  for (let i = 0; i <= wordsLimit; i++) {
+    let component = mount(
+      <WordsTillTest wordsLimit={wordsLimit} dictionaryLength={i} />
+    );
+    const wordsLeft = wordsLimit - i;
+    expect(component.find(".numberOfWords").text()).toBe(
+      wordEndingGenerator(wordsLeft)
+    );
+  }
 });

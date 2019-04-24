@@ -18,7 +18,7 @@ const WordsTillTest = props => {
 };
 
 WordsTillTest.propTypes = {
-  // wordsLimit: PropTypes.number.isRequired,
+  wordsLimit: PropTypes.number.isRequired,
   dictionaryLength: PropTypes.number.isRequired
 };
 
