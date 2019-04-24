@@ -6,7 +6,9 @@ import WordsLimitCell from "../containers/WordsLimitCell";
 import Settings from "../containers/Settings";
 import Word from "../containers/Word";
 import Dictionary from "../containers/Dictionary";
-// functions-tools for testing
+import Main from "../containers/Main";
+
+// tools for testing
 const digitsArratGenerator = conditions => {
   let digitsArray = [];
   for (let i = 0; i <= 30; i++) {
@@ -27,6 +29,40 @@ const conditionsForWord_slova = i => {
 
 const conditionsForWord_slovo = i => {
   return i % 10 === 1 && i !== 11;
+};
+
+const props = {
+  WordsTillTest: {
+    wordsLimit: 30,
+    dictionaryLength: 10
+  },
+  WordsLimitCell: {
+    index: 10,
+    setWordsLimit: jest.fn(),
+    wordsLimit: 30
+  },
+  Settings: {
+    setWordsLimit: jest.fn(),
+    wordsLimit: 30,
+    setOpenSettings: jest.fn()
+  },
+  Word: {
+    index: 1,
+    originalWord: "wow",
+    translatedWord: "воу",
+    dictionary: [],
+    setDictionary: jest.fn()
+  },
+  Dictionary: {
+    open: false,
+    setOpenDictionary: jest.fn(),
+    dictionary: [
+      { word: "cat", translation: "кот" },
+      { word: "dog", translation: "пес" },
+      { word: "lion", translation: "лев" }
+    ],
+    setDictionary: jest.fn()
+  }
 };
 
 // Functions testing
@@ -69,22 +105,14 @@ test("WordsTillTest renders right string", () => {
 });
 
 test("WordsLimitCell renders right string", () => {
-  const props = {
-    index: 10,
-    setWordsLimit: jest.fn(),
-    wordsLimit: 30
-  };
-  const component = mount(<WordsLimitCell {...props} />);
-  expect(component.find(".wordsLimitCell").text()).toBe(`${props.index}`);
+  const component = mount(<WordsLimitCell {...props.WordsLimitCell} />);
+  expect(component.find(".wordsLimitCell").text()).toBe(
+    `${props.WordsLimitCell.index}`
+  );
 });
 
 test("Settings renders right string", () => {
-  const props = {
-    setWordsLimit: jest.fn(),
-    wordsLimit: 30,
-    setOpenSettings: jest.fn()
-  };
-  const component = mount(<Settings {...props} />);
+  const component = mount(<Settings {...props.Settings} />);
   const numbersArray = [10, 20, 30];
   numbersArray.forEach((number, index) => {
     expect(
@@ -97,32 +125,15 @@ test("Settings renders right string", () => {
 });
 
 test("Word renders right string", () => {
-  const props = {
-    index: 1,
-    originalWord: "wow",
-    translatedWord: "воу",
-    dictionary: [],
-    setDictionary: jest.fn()
-  };
-  const component = mount(<Word {...props} />);
+  const component = mount(<Word {...props.Word} />);
   expect(component.find(".word").text()).toBe(
-    props.originalWord + props.translatedWord
+    props.Word.originalWord + props.Word.translatedWord
   );
 });
 
 test("Dictionary renders right string", () => {
-  const props = {
-    open: false,
-    setOpenDictionary: jest.fn(),
-    dictionary: [
-      { word: "cat", translation: "кот" },
-      { word: "dog", translation: "пес" },
-      { word: "lion", translation: "лев" }
-    ],
-    setDictionary: jest.fn()
-  };
-  const component = mount(<Dictionary {...props} />);
-  props.dictionary.forEach((el, index) => {
+  const component = mount(<Dictionary {...props.Dictionary} />);
+  props.Dictionary.dictionary.forEach((el, index) => {
     expect(
       component
         .find(".word")
