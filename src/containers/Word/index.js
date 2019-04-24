@@ -14,8 +14,8 @@ const Word = props => {
         setDictionary([...dictionary]);
       }}
     >
-      <strong className={styles.originalWord}>{originalWord}</strong>
-      <div className={styles.translatedWord}>{translatedWord}</div>
+      <strong>{originalWord}</strong>
+      <div>{translatedWord}</div>
     </div>
   );
 };

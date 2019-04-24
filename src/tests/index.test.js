@@ -5,7 +5,7 @@ import WordsTillTest from "../containers/WordsTillTest";
 import WordsLimitCell from "../containers/WordsLimitCell";
 import Settings from "../containers/Settings";
 import Word from "../containers/Word";
-
+import Dictionary from "../containers/Dictionary";
 // functions-tools for testing
 const digitsArratGenerator = conditions => {
   let digitsArray = [];
@@ -105,6 +105,29 @@ test("Word renders right string", () => {
     setDictionary: jest.fn()
   };
   const component = mount(<Word {...props} />);
-  expect(component.find(".originalWord").text()).toBe(props.originalWord);
-  expect(component.find(".translatedWord").text()).toBe(props.translatedWord);
+  expect(component.find(".word").text()).toBe(
+    props.originalWord + props.translatedWord
+  );
+});
+
+test("Dictionary renders right string", () => {
+  const props = {
+    open: false,
+    setOpenDictionary: jest.fn(),
+    dictionary: [
+      { word: "cat", translation: "кот" },
+      { word: "dog", translation: "пес" },
+      { word: "lion", translation: "лев" }
+    ],
+    setDictionary: jest.fn()
+  };
+  const component = mount(<Dictionary {...props} />);
+  props.dictionary.forEach((el, index) => {
+    expect(
+      component
+        .find(".word")
+        .at(index)
+        .text()
+    ).toBe(el.word + el.translation);
+  });
 });
