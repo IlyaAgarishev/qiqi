@@ -69,21 +69,22 @@ test("WordsTillTest renders right string", () => {
 });
 
 test("WordsLimitCell renders right string", () => {
-  const index = 10;
-  const component = mount(
-    <WordsLimitCell index={index} setWordsLimit={jest.fn()} wordsLimit={30} />
-  );
-  expect(component.find(".wordsLimitCell").text()).toBe(`${index}`);
+  const props = {
+    index: 10,
+    setWordsLimit: jest.fn(),
+    wordsLimit: 30
+  };
+  const component = mount(<WordsLimitCell {...props} />);
+  expect(component.find(".wordsLimitCell").text()).toBe(`${props.index}`);
 });
 
 test("Settings renders right string", () => {
-  const component = mount(
-    <Settings
-      setWordsLimit={jest.fn()}
-      wordsLimit={30}
-      setOpenSettings={jest.fn()}
-    />
-  );
+  const props = {
+    setWordsLimit: jest.fn(),
+    wordsLimit: 30,
+    setOpenSettings: jest.fn()
+  };
+  const component = mount(<Settings {...props} />);
   const numbersArray = [10, 20, 30];
   numbersArray.forEach((number, index) => {
     expect(
