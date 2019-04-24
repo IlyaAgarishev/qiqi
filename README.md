@@ -1,12 +1,7 @@
 # qiqi
 
-Скачать расширение:
-
-[![Download for Chrome](https://corbin.io/img/chrome-button.png)](https://chrome.google.com/webstore/detail/qiqi/jjkdlohmmdpklemfbienpgmaljicbmae?hl=ru)
-
 Qiqi позволяет изучать английский более эффективно посредством прохождения мини тестов. Вы выделяете слово - оно переводится, затем вы можете добавить его в тест. Когда накапливается определенное количество слов - вы проходите тест, тем самым закрепляя материал.
-
-Google chrome extension to learn english effectively. You can translate word and add it to the list, than you can pass the test to consolidate knowledge.
+В скором времени приложение появится в магазине гугл.
 
 ![first](https://i.imgur.com/vykykvk.png)
 
@@ -14,11 +9,12 @@ Google chrome extension to learn english effectively. You can translate word and
 
 ![third](https://i.imgur.com/tDfJdPB.png)
 
-### How to use
+### Как установить расширение локально
 
-1.  Use `yarn install` to install node-modules
-2.  Use `yarn build` to build the project
-3.  Go to chrome://extensions/ , than upload build folder
+1.  `yarn install` - чтобы установить node-modules
+2.  `yarn build` - чтобы собрать проект
+3.  Пройдите по адресу chrome://extensions/
+4.  В верхем левом углу нажмите на кнопку `Загрузить распакованное расширение` и выберите ранее сгенерированную папку 'build'
 
 ### Available yarn commands
 
