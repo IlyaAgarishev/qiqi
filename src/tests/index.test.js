@@ -2,6 +2,7 @@ import React from "react";
 import { mount, render, shallow } from "enzyme";
 import { wordEndingGenerator } from "../utils";
 import WordsTillTest from "../containers/WordsTillTest";
+import WordsLimitCell from "../containers/WordsLimitCell";
 
 // functions-tools for testing
 const digitsArratGenerator = conditions => {
@@ -63,4 +64,11 @@ test("WordsTillTest renders right string", () => {
       wordEndingGenerator(wordsLeft)
     );
   }
+});
+
+test("WordsLimitCell renders right string", () => {
+  let component = mount(
+    <WordsLimitCell index={2} setWordsLimit={jest.fn()} wordsLimit={30} />
+  );
+  expect(component.find(".wordsLimitCell").text()).toBe("2");
 });
