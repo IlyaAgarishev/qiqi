@@ -3,6 +3,7 @@ import { mount, render, shallow } from "enzyme";
 import { wordEndingGenerator } from "../utils";
 import WordsTillTest from "../containers/WordsTillTest";
 import WordsLimitCell from "../containers/WordsLimitCell";
+import Settings from "../containers/Settings";
 
 // functions-tools for testing
 const digitsArratGenerator = conditions => {
@@ -56,7 +57,7 @@ test("wordEndingGenerator returns word 'slovo", () => {
 test("WordsTillTest renders right string", () => {
   const wordsLimit = 30;
   for (let i = 0; i <= wordsLimit; i++) {
-    let component = mount(
+    const component = mount(
       <WordsTillTest wordsLimit={wordsLimit} dictionaryLength={i} />
     );
     const wordsLeft = wordsLimit - i;
@@ -67,8 +68,28 @@ test("WordsTillTest renders right string", () => {
 });
 
 test("WordsLimitCell renders right string", () => {
-  let component = mount(
-    <WordsLimitCell index={2} setWordsLimit={jest.fn()} wordsLimit={30} />
+  const index = 10;
+  const component = mount(
+    <WordsLimitCell index={index} setWordsLimit={jest.fn()} wordsLimit={30} />
   );
-  expect(component.find(".wordsLimitCell").text()).toBe("2");
+  expect(component.find(".wordsLimitCell").text()).toBe(`${idnex}`);
+});
+
+test("Settings renders right string", () => {
+  const component = mount(
+    <Settings
+      setWordsLimit={jest.fn()}
+      wordsLimit={30}
+      setOpenSettings={jest.fn}
+    />
+  );
+  const numbersArray = [10, 20, 30];
+  numbersArray.forEach((number, index) => {
+    expect(
+      component
+        .find(".wordsLimitCell")
+        .at(index)
+        .text()
+    ).toBe(`${number}`);
+  });
 });
