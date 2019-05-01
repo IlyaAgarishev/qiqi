@@ -1,7 +1,9 @@
 # qiqi
 
+Скачать расширение:
+[![Download for Chrome](https://corbin.io/img/chrome-button.png)](https://chrome.google.com/webstore/detail/qiqi/jjkdlohmmdpklemfbienpgmaljicbmae?hl=ru)
+
 Qiqi позволяет изучать английский более эффективно посредством прохождения мини тестов. Вы выделяете слово - оно переводится, затем вы можете добавить его в тест. Когда накапливается определенное количество слов - вы проходите тест, тем самым закрепляя материал.
-В скором времени приложение появится в магазине гугл.
 
 ![first](https://i.imgur.com/vykykvk.png)
 
